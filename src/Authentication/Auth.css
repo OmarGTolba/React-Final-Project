@@ -1,0 +1,22 @@
+.container {
+    margin-top: 9% !important;
+    width: 70% !important;
+}
+
+.image {
+    width: 50%;
+    height: 60vh;
+    background-color: #ccc;
+    transition: margin 2s ease;
+}
+
+.form__group {
+    transition: opacity 1s ease;
+}
+
+/* .............................. Form Input .............................. */
+
+
+
+
+/* .............................. End Input .............................. */
