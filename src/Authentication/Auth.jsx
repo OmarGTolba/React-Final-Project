@@ -11,8 +11,11 @@ export default function Login() {
         password: '',
         confirmPassword: ''
     });
-
-    const handleInputChange = (e) => {
+    const [signInForm, setsignInForm] = useState({
+        email: '',
+        password: '',
+    });
+    const handleSignUpInputChange = (e) => {
         const { name, value } = e.target;
         setsignUpForm({
             ...signUpForm,
@@ -20,6 +23,14 @@ export default function Login() {
         });
     };
 
+    
+    const handleSignInInputChange = (e) => {
+        const { name, value } = e.target;
+        setsignInForm({
+            ...signUpForm,
+            [name]: value
+        });
+    };
     const handleSwitch = () => {
         setIsSwitched(!isSwitched);
     };
@@ -34,6 +45,18 @@ export default function Login() {
         //     console.error('Signup failed:', error); 
         // }
     };
+
+    const handleSignIn = async () => {
+        console.log(signUpForm);
+        // try {
+        //     const response = await axios.post('http://localhost:3000/auth/signIn', signInForm);
+        //     console.log(response.data); 
+        // } catch (error) {
+        //     console.error('Signup failed:', error); 
+        // }
+    };
+
+    
 
     return (
         <>
@@ -50,32 +73,33 @@ export default function Login() {
                     padding:'30px'
                 }}
             >
-                <Typography variant="h4" margin='0 0px 16px' textAlign='center'>Sign Up</Typography>
 
                 {isSwitched ? (
                     <Box className='inputs w-100 m-auto'>
+                        <Typography variant="h4" margin='0 0px 16px' textAlign='center'>Sign Up</Typography>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%',marginBottom:'16px' }}>
-                            <TextField sx={{ width: 'calc(50% - 5px)' }} label="First Name" name="firstName" value={signUpForm.firstName} onChange={handleInputChange} />
-                            <TextField sx={{ width: 'calc(50% - 5px)' }} label="Last Name" name="lastName" value={signUpForm.lasstName} onChange={handleInputChange} />
+                            <TextField sx={{ width: 'calc(50% - 5px)' }} label="First Name" name="firstName" value={signUpForm.firstName} onChange={handleSignUpInputChange} />
+                            <TextField sx={{ width: 'calc(50% - 5px)' }} label="Last Name" name="lastName" value={signUpForm.lasstName} onChange={handleSignUpInputChange} />
                         </Box>
 
-                        <TextField sx={{ width: '100%',marginBottom:'16px' }} label="Email" name="email" value={signUpForm.email} onChange={handleInputChange} />
-                        <TextField sx={{ width: '100%' ,marginBottom:'16px'}} label="phoneNumber" name="phoneNumber" value={signUpForm.phoneNumber} onChange={handleInputChange} />
-                        <TextField sx={{ width: '100%',marginBottom:'16px' }} label="password" name="password" value={signUpForm.password} onChange={handleInputChange} />
-                        <TextField sx={{ width: '100%' ,marginBottom:'16px'}} label="confirmPassword" name="confirmPassword" value={signUpForm.confirmPassword} onChange={handleInputChange} />
-                        <TextField sx={{ width: '100%' ,marginBottom:'16px'}} label="birthday" name="birthday" value={signUpForm.birthday} onChange={handleInputChange} />
+                        <TextField sx={{ width: '100%',marginBottom:'16px' }} label="Email" name="email" value={signUpForm.email} onChange={handleSignUpInputChange} />
+                        <TextField sx={{ width: '100%' ,marginBottom:'16px'}} label="phoneNumber" name="phoneNumber" value={signUpForm.phoneNumber} onChange={handleSignUpInputChange} />
+                        <TextField sx={{ width: '100%',marginBottom:'16px' }} label="password" name="password" value={signUpForm.password} onChange={handleSignUpInputChange} />
+                        <TextField sx={{ width: '100%' ,marginBottom:'16px'}} label="confirmPassword" name="confirmPassword" value={signUpForm.confirmPassword} onChange={handleSignUpInputChange} />
+                        <TextField sx={{ width: '100%' ,marginBottom:'16px'}} label="birthday" name="birthday" value={signUpForm.birthday} onChange={handleSignUpInputChange} />
 
                         <Button onClick={handleSignUp} variant="contained" sx={{ width: '50%', margin: 'auto', marginTop: '10px', marginBottom: '10px', textAlign: 'center' }}>register</Button>
                     </Box>
                 ) : (
-                    <Box className='inputs'>
-                        <Box sx={{ opacity: 0 }}>
-                            <TextField fullWidth label="Name" />
-                        </Box>
+                    <Box className='inputs' sx={{ height:'100%', display:'flex' , flexDirection:'column', justifyContent:'center' }} >
 
-                        <TextField fullWidth label="User / Email" />
-                        <TextField fullWidth label="Password" />
-                        <TextField fullWidth label="Re-password" />
+                        <Typography variant="h4" margin='0 0px 16px' textAlign='center'>Sign In</Typography>
+
+
+                        <TextField sx={{ width: '100%',marginBottom:'16px' }} label="Email" name="email" value={signInForm.email} onChange={handleSignInInputChange} />
+                        <TextField sx={{ width: '100%',marginBottom:'16px' }} label="password" name="password" value={signInForm.password} onChange={handleSignInInputChange} />
+
+                        <Button onClick={handleSignIn} variant="contained" sx={{ width: '50%', margin: 'auto', marginTop: '10px', marginBottom: '10px', textAlign: 'center' }}>register</Button>
                     </Box>
                 )}
             </Box>
