@@ -23,7 +23,7 @@ const FlipCard = () => {
           width: '300px',
           transformStyle: 'preserve-3d', 
           transition: 'transform 0.6s',
-          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', // Flipping effect
+          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', 
         }}
       >
         <CardContent>
@@ -31,7 +31,7 @@ const FlipCard = () => {
             Word of the Day
           </Typography>
           <Typography variant="h5" component="div">
-            {/* Add your word here */}
+         
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             adjective
