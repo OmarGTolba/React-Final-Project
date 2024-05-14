@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
-import { Card, CardActions, CardContent, Button, Typography } from '@mui/material';
+import { Card, CardActions, CardContent, Button, Typography, Box, CardMedia } from '@mui/material';
 
-const FlipCard = () => {
+const FlipCard = ({children}) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const handleCardFlip = () => {
     setIsFlipped(!isFlipped);
+    if (!isFlipped) {
+      setTimeout(() => {
+        setShowOverlay(true);
+      }, 400); 
+    } else {
+      setShowOverlay(false);
+    }
   };
 
   return (
@@ -14,38 +22,51 @@ const FlipCard = () => {
       onMouseLeave={handleCardFlip}
       style={{
         perspective: '1000px', 
-      
-        margin:'15px',
+        margin: '15px',
       }}
     >
       <Card
         sx={{
           width: '300px',
+          height:'200px',
           transformStyle: 'preserve-3d', 
           transition: 'transform 0.6s',
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', 
         }}
       >
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Word of the Day
-          </Typography>
-          <Typography variant="h5" component="div">
-         
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            adjective
-          </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
+        <CardMedia
+        sx={{ height: 140 ,
+          opacity: isFlipped ? 0.3 : 1,
+        }}
+        image="../public/PlaceholderGlossary.svg"
+        title="green iguana"
+      />
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
+      {/* Overlay */}
+      {showOverlay && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+          }}
+        >
+{children}
+        </Box>
+      )}
     </div>
   );
 };

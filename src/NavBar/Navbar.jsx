@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,11 +14,12 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Card, CardActions, CardContent } from '@mui/material';
 import FlipCard from '../components/FlipCard';
+import CategoryContext from '../contexts/CategoriesContext';
 
 const pages = ['Products', 'Categories', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 export default function Navbar() {
+  const { categories } = useContext(CategoryContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [hoveredPage, setHoveredPage] = React.useState(null);
@@ -34,12 +35,13 @@ export default function Navbar() {
     setAnchorElNav(null);
   };
 
-  
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
   const handlePageHover = (event, page) => {
+   console.log(categories);
     setHoveredPage(page);
   };
 
@@ -48,7 +50,7 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static"  sx={{background:'gray' , zIndex:9}} >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -63,7 +65,7 @@ export default function Navbar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#ccc',
               textDecoration: 'none',
             }}
           >
@@ -99,16 +101,16 @@ export default function Navbar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-        
-        
+
+
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
-        
-        
+
+
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
@@ -130,9 +132,9 @@ export default function Navbar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-        
-        
-            {pages.map((page,index) => (
+
+
+            {pages.map((page, index) => (
               <Box
                 key={page}
                 onMouseEnter={(event) => handlePageHover(event, page)}
@@ -140,13 +142,13 @@ export default function Navbar() {
                 sx={{ my: 2, textAlign: 'center', position: 'relative' }}
               >
                 <Button sx={{ color: 'white' }}>{page}</Button>
-                {hoveredPage === page && page == 'Categories'&& (
+                {hoveredPage === page && page == 'Categories' && (
                   <Box
                     sx={{
                       position: 'absolute',
                       top: '100%',
                       left: '500px',
-                      width:'1000px',
+                      width: '1000px',
                       transform: 'translateX(-50%)',
                       background: 'white',
                       boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.3)',
@@ -155,18 +157,16 @@ export default function Navbar() {
                       px: 2,
                     }}
                   >
-          
-          
 
 
-          <div className='d-flex'>
-          
-  
-             <FlipCard className='m-5' />
-             <FlipCard/>
-             <FlipCard/>
-        
-      </div>
+
+                    <div className='d-flex'>
+                    {categories && categories.categories.map(category => (
+  <FlipCard >
+   { category.title}
+    </FlipCard>
+))}
+                    </div>
                   </Box>
                 )}
               </Box>
@@ -177,7 +177,7 @@ export default function Navbar() {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-               </IconButton>
+              </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
