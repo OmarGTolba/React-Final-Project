@@ -16,7 +16,7 @@ import { Card, CardActions, CardContent } from '@mui/material';
 import FlipCard from '../components/FlipCard';
 import CategoryContext from '../contexts/CategoriesContext';
 import zIndex from '@mui/material/styles/zIndex';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 
 const pages = ['Products', 'Categories', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -25,7 +25,17 @@ export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [hoveredPage, setHoveredPage] = React.useState(null);
+  const navigate = useNavigate();
 
+
+
+  
+  const handleSettingClick = (event) => {
+    console.log(event.currentTarget.textContent);
+    if (event.currentTarget.textContent === 'Profile') {
+      navigate('/profile');
+    }
+  };
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -52,15 +62,14 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static"  sx={{background:'gray' , zIndex:9}} >
+    <AppBar position="static"  sx={{background:'#5daa60' , zIndex:9}} >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} color="secondary" />
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} color="gray" />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -73,7 +82,6 @@ export default function Navbar() {
  
           >
             LOGO
-           
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -143,6 +151,20 @@ export default function Navbar() {
 <Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
 <Link to={'products'} className='text-decoration-none h5 mx-2 ' >Products </Link>
 </Box>
+
+
+<Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
+<Link to={'login'} className='text-decoration-none h5 mx-2 ' >login </Link>
+</Box>
+
+
+<Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
+<Link to={'cart'} className='text-decoration-none h5 mx-2 ' >cart </Link>
+</Box>
+
+<Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
+<Link to={'about'} className='text-decoration-none h5 mx-2 ' >About us </Link>
+</Box>
            
               <Box
                 onMouseEnter={(event) => handlePageHover(event)}
@@ -190,7 +212,7 @@ export default function Navbar() {
 </Box>
           </Box>
           <Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
-<Link to={'add-product'} className='text-decoration-none h4 mx-2 ' ><Button color="secondary" variant="contained" >List</Button> </Link>
+<Link to={'add-product'} className='text-decoration-none h4 mx-2 ' ><Button sx={{backgroundColor:'gray'}} variant="contained" >List</Button> </Link>
 </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -216,8 +238,9 @@ export default function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem  key={setting} onClick={handleCloseUserMenu}>
+                 <MenuItem onClick={handleSettingClick} textAlign="center">{setting}</MenuItem>
+  
                 </MenuItem>
               ))}
             </Menu>
