@@ -22,13 +22,15 @@ const FlipCard = ({children}) => {
       onMouseLeave={handleCardFlip}
       style={{
         perspective: '1000px', 
-        margin: '15px',
+        margin: '10px',
+        zIndex:'3'
       }}
     >
       <Card
         sx={{
-          width: '300px',
-          height:'200px',
+zIndex:'3',
+          width: '200px',
+          height:'150px',
           transformStyle: 'preserve-3d', 
           transition: 'transform 0.6s',
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', 
@@ -37,6 +39,7 @@ const FlipCard = ({children}) => {
         <CardContent>
         <CardMedia
         sx={{ height: 140 ,
+          zIndex:'3',
           opacity: isFlipped ? 0.3 : 1,
         }}
         image="../public/PlaceholderGlossary.svg"

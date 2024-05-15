@@ -11,7 +11,7 @@ export default function MainCard() {
     <Card sx={{ width: '23%', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)' }}>
       <CardMedia
         sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
+        image="../public/PlaceholderGlossary.svg"
         title="green iguana"
       />
       <CardContent>

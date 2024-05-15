@@ -15,6 +15,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Card, CardActions, CardContent } from '@mui/material';
 import FlipCard from '../components/FlipCard';
 import CategoryContext from '../contexts/CategoriesContext';
+import zIndex from '@mui/material/styles/zIndex';
+import { Link } from 'react-router-dom';
 
 const pages = ['Products', 'Categories', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -40,9 +42,9 @@ export default function Navbar() {
     setAnchorElUser(null);
   };
 
-  const handlePageHover = (event, page) => {
+  const handlePageHover = (event) => {
    console.log(categories);
-    setHoveredPage(page);
+   setHoveredPage(true)
   };
 
   const handlePageHoverOut = () => {
@@ -53,23 +55,25 @@ export default function Navbar() {
     <AppBar position="static"  sx={{background:'gray' , zIndex:9}} >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} color="secondary" />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: '#ccc',
+   color:"#ccc",
               textDecoration: 'none',
             }}
+ 
           >
             LOGO
+           
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -83,6 +87,8 @@ export default function Navbar() {
             >
               <MenuIcon />
             </IconButton>
+
+         
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -113,6 +119,7 @@ export default function Navbar() {
 
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Link to={'products'}>
           <Typography
             variant="h5"
             noWrap
@@ -131,18 +138,21 @@ export default function Navbar() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-
-
-            {pages.map((page, index) => (
+          </Link>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'  } ,textAlign: 'center' }}>
+<Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
+<Link to={'products'} className='text-decoration-none h5 mx-2 ' >Products </Link>
+</Box>
+           
               <Box
-                key={page}
-                onMouseEnter={(event) => handlePageHover(event, page)}
+                onMouseEnter={(event) => handlePageHover(event)}
                 onMouseLeave={handlePageHoverOut}
                 sx={{ my: 2, textAlign: 'center', position: 'relative' }}
               >
-                <Button sx={{ color: 'white' }}>{page}</Button>
-                {hoveredPage === page && page == 'Categories' && (
+                
+<Link  className='text-decoration-none h5 mx-2 ' >Categories </Link>
+           
+                {hoveredPage && (
                   <Box
                     sx={{
                       position: 'absolute',
@@ -155,29 +165,39 @@ export default function Navbar() {
                       borderRadius: '5px',
                       py: 1,
                       px: 2,
+                      zIndex:3
                     }}
                   >
 
 
-
-                    <div className='d-flex'>
-                    {categories && categories.categories.map(category => (
-  <FlipCard >
+               
+                    <Box className='d-flex flex-wrap' sx={{zIndex:'999', height:'100%'  }}  >
+                    {categories && categories?.categories?.map(category => (
+  <FlipCard  >
    { category.title}
     </FlipCard>
 ))}
-                    </div>
+                    </Box>
                   </Box>
-                )}
+)}
+               
               </Box>
-            ))}
-          </Box>
+            
 
+
+              <Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
+<Link to={'Home'} className='text-decoration-none h5 mx-2 ' >Home </Link>
+</Box>
+          </Box>
+          <Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
+<Link to={'add-product'} className='text-decoration-none h4 mx-2 ' ><Button color="secondary" variant="contained" >List</Button> </Link>
+</Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 , fontSize:40 }}  />
               </IconButton>
+              
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
