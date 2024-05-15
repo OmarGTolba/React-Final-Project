@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import axios from 'axios';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
+import UserContext from '../contexts/UserContext';
 
 export default function Login() {
     const [isSwitched, setIsSwitched] = useState(false);
@@ -27,7 +29,7 @@ export default function Login() {
     const handleSignInInputChange = (e) => {
         const { name, value } = e.target;
         setsignInForm({
-            ...signUpForm,
+            ...signInForm,
             [name]: value
         });
     };
@@ -38,22 +40,24 @@ export default function Login() {
 
     const handleSignUp = async () => {
         console.log(signUpForm);
-        // try {
-        //     const response = await axios.post('http://localhost:3000/auth/signup', signUpForm);
-        //     console.log(response.data); 
-        // } catch (error) {
-        //     console.error('Signup failed:', error); 
-        // }
+        try {
+            const response = await axios.post('http://localhost:3000/api/v1/auth/signup', signUpForm);
+            console.log(response.data); 
+        } catch (error) {
+            console.error('Signup failed:', error); 
+        }
     };
-
+    const { setToken } = useContext(UserContext)
     const handleSignIn = async () => {
-        console.log(signUpForm);
-        // try {
-        //     const response = await axios.post('http://localhost:3000/auth/signIn', signInForm);
-        //     console.log(response.data); 
-        // } catch (error) {
-        //     console.error('Signup failed:', error); 
-        // }
+        console.log(signInForm);
+        try {
+            const response = await axios.post('http://localhost:3000/api/v1/auth/login', signInForm);
+            console.log(response.data.token); 
+        setToken(response.data.token)
+        localStorage.setItem('token',response.data.token)
+        } catch (error) {
+            console.error('Signup failed:', error); 
+        }
     };
 
     
