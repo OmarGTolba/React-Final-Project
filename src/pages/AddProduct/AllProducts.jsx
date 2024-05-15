@@ -4,6 +4,7 @@ import { Box, Container, FormControlLabel, RadioGroup , FormControl , FormLabel 
 import { Button } from 'bootstrap'
 import ProductsContext from '../../contexts/ProductsContext'
 import CategoryContext from '../../contexts/CategoriesContext'
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 
 export default function AllProducts() {
     const {products} = useContext(ProductsContext)
@@ -99,48 +100,70 @@ setDisplayedProducts(dp)
     <>
     <Container sx={{display:'flex' , marginTop:'20px' , justifyContent:'space-between'}} >
 
-        <Box sx={{width:'25%' , height:'82vh', backgroundColor:'#ccc'}} >
+        <Box sx={{width:'25%' , height:'82vh', border:'4px solid #5daa60' , borderRadius:'10px'}} >
 <Box sx={{width:'75%', margin:'auto' , marginTop:2}}>
 <FormControl>
   <FormLabel id="demo-radio-buttons-group-label">Categories</FormLabel>
   <RadioGroup
-    aria-labelledby="demo-radio-buttons-group-label"
-    defaultValue="All"
-    name="radio-buttons-group"
-    onChange={filterByCategory}
-  >
+  aria-labelledby="demo-radio-buttons-group-label"
+  defaultValue="All"
+  name="radio-buttons-group"
+  onChange={filterByCategory}
+>
+  <FormControlLabel
+    value="All"
+    control={<Radio sx={{ '&.Mui-checked': { color: 'green' } }} />} // Apply green color when checked and change icon size
+    label="All"
+  />
+  {categories?.categories?.map((category) => (
+    <FormControlLabel
+      key={category.title} // Make sure to add a unique key for each FormControlLabel
+      value={category.title}
+      control={<Radio sx={{ '&.Mui-checked': { color: 'green' } }} />} // Apply green color when checked
+      label={category.title}
+    />
+  ))}
+</RadioGroup>
 
-
-<FormControlLabel value="All" control={<Radio />} label="All" />
-{categories?.categories?.map((category)=>(
-
-<FormControlLabel value={category?.title} control={<Radio />} label={category?.title} />
-))}
-
-    
-  </RadioGroup>
 </FormControl>
 </Box>
 <Box sx={{width:'75%', margin:'auto' , marginTop:2}}>
 <FormControl>
-  <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+  <FormLabel id="demo-radio-buttons-group-label">Location</FormLabel>
   <RadioGroup
-    aria-labelledby="demo-radio-buttons-group-label"
-    defaultValue="female"
-    name="radio-buttons-group"
-    onChange={filterByLocation}
-  >
-    <FormControlLabel value="All" control={<Radio />} label="All" />
-    <FormControlLabel value="portsaid" control={<Radio />} label="portsaid" />
-    <FormControlLabel value="Ismailia" control={<Radio />} label="Ismailia" />
-    <FormControlLabel value="Alex" control={<Radio />} label="Alex" />
-  </RadioGroup>
+  
+  aria-labelledby="demo-radio-buttons-group-label"
+  defaultValue="All"
+  name="radio-buttons-group"
+  onChange={filterByLocation}
+>
+  <FormControlLabel
+    value="All"
+    control={<Radio sx={{ '&.Mui-checked': { color: 'green' } }} />} // Apply green color when checked
+    label="All"
+  />
+  <FormControlLabel
+    value="portsaid"
+    control={<Radio sx={{ '&.Mui-checked': { color: 'green' } }} />} // Apply green color when checked
+    label="portsaid"
+  />
+  <FormControlLabel
+    value="Ismailia"
+    control={<Radio sx={{ '&.Mui-checked': { color: 'green' } }} />} // Apply green color when checked
+    label="Ismailia"
+  />
+  <FormControlLabel
+    value="Alex"
+    control={<Radio sx={{ '&.Mui-checked': { color: 'green' } }} />} // Apply green color when checked
+    label="Alex"
+  />
+</RadioGroup>
+
 </FormControl>
 </Box>
 
 
 
-<button>Search</button>
         </Box>
 
 

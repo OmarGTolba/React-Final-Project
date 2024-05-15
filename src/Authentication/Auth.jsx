@@ -47,6 +47,9 @@ export default function Login() {
             console.error('Signup failed:', error); 
         }
     };
+
+
+    
     const { setToken } = useContext(UserContext)
     const handleSignIn = async () => {
         console.log(signInForm);
