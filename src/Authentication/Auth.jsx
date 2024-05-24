@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useContext, useState } from "react";
 import "./Auth.css";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import UserContext from "../contexts/UserContext";
+import axios from "axios";
 export default function Auth() {
   const handleSignUp = async () => {
     console.log(signUpForm);

@@ -7,8 +7,8 @@ import PaymentsIcon from '@mui/icons-material/Payments';
 
 function Sidebar({ drawerWidth, handleListItemClick, selectedIndex }) {
     return (
-        <div>
-            <Box sx={{ display: 'flex', flexGrow: 1, height: '100%', position: 'fixed', top: '11vh', bottom: '0' }}>
+        <div style={{display:'flex' ,marginTop:'5%', zIndex:''}}>
+            <Box sx={{ display: 'flex'}}>
                 {/* Shape beside the sidebar */}
                 <Shape />
                 {/* Sidebar-Section */}
@@ -16,9 +16,13 @@ function Sidebar({ drawerWidth, handleListItemClick, selectedIndex }) {
                     variant="permanent"
                     sx={{
                         width: drawerWidth,
-                        flexShrink: 0,
+                        // flexShrink: 0,
+                        // display:'flex',
+                        // alignItems:'center' ,
+                        // position: 'relative',
+
                         '& .MuiDrawer-paper': {
-                            width: drawerWidth, position: 'relative', bgcolor: '#7B7B7B', color: '#FFFFFF', height: '100 %', overflowY: 'auto'
+                            width: drawerWidth, bgcolor: '#5daa60', border:'none', color: '#FFFFFF', height: '600px', borderRadius:'10px', position:'unset'
                         },
                     }}
                 >
@@ -26,7 +30,7 @@ function Sidebar({ drawerWidth, handleListItemClick, selectedIndex }) {
                         color: '#FFFFFF', fontWeight: '700', lineHeight: '44.98px'
                     }}>Hello Mohamed!</Toolbar>
 
-                    <Box sx={{ overflow: 'auto', position: 'relative' }}>
+                    <Box sx={{  }}>
                         <List>
                             {['Profile Info', 'Orders', 'Addresses', 'Payments'].map((text, index) => (
                                 <ListItem
@@ -34,10 +38,10 @@ function Sidebar({ drawerWidth, handleListItemClick, selectedIndex }) {
                                     disablePadding
                                     selected={selectedIndex === index}
                                     onClick={() => handleListItemClick(index)}
-                                    sx={{ '&.Mui-selected': { bgcolor: '#FFFFFF', color: 'black', borderLeft: '4px solid black', '& .MuiListItemIcon-root': { color: 'black' } } }}
+                                    sx={{ '&.Mui-selected': { bgcolor: '#FFFFFF', color: '#5daa60', borderLeft: '4px solid #5daa60', '& .MuiListItemIcon-root': { color: '#5daa60' } } }}
                                 >
                                     <ListItemButton >
-                                        <ListItemIcon sx={{ color: '#fffa' }}>
+                                        <ListItemIcon sx={{ color: '#FFFFFF' }}>
                                             {index === 0 ? <AccountCircleIcon /> : ""}
                                             {index === 1 ? <FactCheckIcon /> : ""}
                                             {index === 2 ? <MapsHomeWorkIcon /> : ""}
