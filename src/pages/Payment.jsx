@@ -48,8 +48,8 @@ const ModalContent = styled(Box)({
 function Payment() {
     const [open, setOpen] = useState(false);
     const [cardDetails, setCardDetails] = useState({
-        name: '',
-        number: '',
+        name: 'Mohamed Ayman',
+        number: '5455 - 4545 - 7887 - 9899',
     });
 
     const handleOpen = () => setOpen(true);

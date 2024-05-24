@@ -62,7 +62,7 @@ const PlaceOrder = () => {
     const [selectedCard, setSelectedCard] = useState(null)
 
     const handleCardClick = (cardId) =>{
-        if(selectedCard === cardId){
+        if(+selectedCard === +cardId){
             setSelectedCard(null)
             console.log('full');
         }else{
@@ -118,7 +118,7 @@ const PlaceOrder = () => {
 
     const handleAddressClick = (addressId) => {
         console.log(addressId);
-        if (selectedAddress === addressId) {
+        if (+selectedAddress === +addressId) {
             setSelectedAddress(null);
         } else {
             setSelectedAddress(addressId);
@@ -271,11 +271,12 @@ const PlaceOrder = () => {
                         </RadioGroup>
                     </FormControl>
 
-                    {selectedPaymentMethod === 'card' && (
+                    {
+                    selectedPaymentMethod === 'card' && (
                         <Grid container spacing={2} mt={2}>
                             {cards.map(card => (
                                 <Grid key={card.id} xs={3.5}>
-                                    <PaymentCard cards={card} selectedCard={selectedCard} setSelectedCard={setSelectedCard} handleCardClick={handleCardClick}/>
+                                    <PaymentCard  cardId={card.id} cardName={card.name} cardNumber={card.number} selectedCard={selectedCard} setSelectedCard={setSelectedCard} handleCardClick={handleCardClick}/>
                                 </Grid>
                             ))}
                             <Grid item xs={12} md={4}>
