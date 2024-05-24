@@ -33,7 +33,7 @@ const Shape2 = styled(Box)(({ theme }) => ({
   borderRadius: '50%',
 }));
 
-const PaymentCard = ({ name, number, cards, selectedCard, setSelectedCard, handleCardClick }) => {
+const PaymentCard = ({cardId, cardName, cardNumber, name, number, card, selectedCard, setSelectedCard, handleCardClick }) => {
   const [cvv, setCvv] = useState('');
   const [isEditingCvv, setIsEditingCvv] = useState(false);
 
@@ -49,7 +49,7 @@ const PaymentCard = ({ name, number, cards, selectedCard, setSelectedCard, handl
       return;
     }
 
-    if (selectedCard === cardId) {
+    if (+selectedCard === +cardId) {
       setSelectedCard(null);
     } else {
       setSelectedCard(cardId);
@@ -57,8 +57,8 @@ const PaymentCard = ({ name, number, cards, selectedCard, setSelectedCard, handl
   };
 
   return (
-    <CardContainer onClick={() => handleCardClickWithCvv(cards.id)} sx={{cursor:'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      {selectedCard === cards.id ? (
+    <CardContainer onClick={() => handleCardClickWithCvv(cardId)} sx={{cursor:'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      {+selectedCard === +cardId ? (
         <TextField
           id="cvv"
           label="CVV"
@@ -96,15 +96,17 @@ const PaymentCard = ({ name, number, cards, selectedCard, setSelectedCard, handl
             <Typography variant="body2" sx={{ marginBottom: '20px' }}>
               Name
             </Typography>
+            <Box>
             <Typography variant="h6">{name}</Typography>
-            <Typography variant="h6">{cards.name}</Typography>
-            <Typography variant="h6">{cards.number}</Typography>
+            {/* <Typography variant="body2" sx={{ position: 'absolute', bottom: '20px', left: '20px' }}>
+              {number}
+            </Typography> */}
+            </Box>
+            <Typography variant="h6">{cardName}</Typography>
+            <Typography variant="h6">{cardNumber}</Typography>
             <Box sx={{ position: 'absolute', top: '20px', right: '20px' }}>
               <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard" width="40" />
             </Box>
-            <Typography variant="body2" sx={{ position: 'absolute', bottom: '20px', left: '20px' }}>
-              {number}
-            </Typography>
             <Typography variant="body2" sx={{ position: 'absolute', bottom: '20px', left: '20px' }}>
               CVV : {cvv}
             </Typography>

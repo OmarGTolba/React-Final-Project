@@ -177,10 +177,6 @@ export default function Navbar({darkMode , toggleDarkMode}) {
               <Link id="RouterNavLink" to={'about'} className='text-decoration-none h5 mx-2 ' >About us </Link>
             </Box>
 
-            <Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
-              <Link id="RouterNavLink" to={'card'} className='text-decoration-none h5 mx-2 ' >Card </Link>
-            </Box>
-
             <Box
               onMouseEnter={(event) => handlePageHover(event)}
               onMouseLeave={handlePageHoverOut}
