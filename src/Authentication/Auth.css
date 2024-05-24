@@ -20,3 +20,71 @@
 
 
 /* .............................. End Input .............................. */
+
+/* Auth.css */
+.clipped-element {
+    width: 150px;
+    height: 150px;
+  background-image: url('./../../public/Asset\ 1.svg'); position: absolute;
+  top: calc(100% - 150px); 
+    right: calc(100% - 150px); 
+    transform: rotate(0deg); 
+  
+    transition: top .8s ease, right .8s ease, transform .8s ease; 
+    will-change: transform; 
+}
+
+.clipped-element.move-bottom {
+    
+    top: 0px;
+    right: 0px;
+    transform: rotate(180deg);  
+}
+
+
+.inputs {
+    transition: opacity 1s ease;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs.fade-out {
+    opacity: 0;
+}
+
+.inputs.fade-in {
+    opacity: 1;
+}
+  .container{
+    position: relative;
+    /* overflow: hidden !important; */
+    width: 40% !important;
+    margin: auto;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    height: 90vh;
+    position: relative;
+  }
+
+  .regImg{
+    position: absolute;
+    width: 270px;
+    z-index: 999;
+    /* height: 250px; */
+    bottom: 5px;
+    left: -170px;
+  }
+  
+
+
+  
+  .logImg{
+    position: absolute;
+    width: 300px;
+    z-index: 999;
+    /* height: 250px; */
+    bottom: 5px;
+    right: -150px;
+  }
+
