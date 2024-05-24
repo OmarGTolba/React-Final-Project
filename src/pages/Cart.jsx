@@ -22,32 +22,28 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
+import { CartContext } from '../contexts/CartContext';
 
 const Cart = () => {
 
-const {token} = useContext(UserContext)
+    const { cartItems, updateCartItemQuantity, setCartItems, totalItems } = useContext(CartContext);
 
 
 useEffect(() => {
-    console.log(token);
+    // console.log(token);
   }, []); 
 
+  const safeTotalItems = isNaN(totalItems) ? 0 : totalItems;
 
 
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: 'T-Shirt', color: 'White', size: 'L', price: 300, quantity: 1, image: 'https://via.placeholder.com/150' },
-        { id: 2, name: 'Skirt', color: 'Black', size: 'L', price: 600, quantity: 2, image: 'https://via.placeholder.com/150' }
-    ]);
     const [openDialog, setOpenDialog] = useState(false);
     const [deleteItemId, setDeleteItemId] = useState(null);
 
+    
+
     const handleQuantityChange = (id, quantity) => {
-        setCartItems(cartItems.map(item => item.id === id ? { ...item, quantity } : item));
+        updateCartItemQuantity(id, quantity);
     };
-
-
-
-
 
     const handleDelete = id => {
         setDeleteItemId(id);
@@ -66,23 +62,14 @@ useEffect(() => {
     };
 
     const navigate = useNavigate();
-    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    // const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     return (
+        <div>
+
         <Container sx={{ marginTop: '70px' }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        LOGO
-                    </Typography>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={totalItems} color="secondary">
-                            <ShoppingCartIcon />
-                        </Badge>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
+
             <Box mt={4}>
                 <Box display="flex" alignItems="center" mb={2} justifyContent={'space-between'} borderBottom={'2px solid black'}>
                     <Box sx={{ display: 'flex' }}>
@@ -91,7 +78,7 @@ useEffect(() => {
                     </Box>
                     <Box sx={{ display: 'flex' }}>
                         <Box sx={{ width: "26px", height: '35px', backgroundColor: 'black', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '5px' }}>
-                            {totalItems}
+                            {safeTotalItems}
                         </Box>
                         <Typography variant="h4" ml={1}>Items</Typography>
                     </Box>
@@ -180,6 +167,7 @@ useEffect(() => {
                 </DialogActions>
             </Dialog>
         </Container>
+        </div>
     );
 };
 

@@ -1,7 +1,8 @@
-import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack, TextField, Typography } from "@mui/material"
+import { Box, Button, ButtonBase, ButtonGroup, Container, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack, TextField, Typography } from "@mui/material"
 import StyledComponents from "../components/StyedButton"
 import ManIcon from '@mui/icons-material/Man';
 import Woman2Icon from '@mui/icons-material/Woman2';
+import GreenButton from "../components/StyedButton";
 
 function ProfileInfo({ handleOpen,
     handleClose,
@@ -17,11 +18,7 @@ function ProfileInfo({ handleOpen,
                 component="main"
                 sx={{
                     // margin: '0 auto',
-                    width: '60%',
-                    marginTop: '7%',
-                    marginBottom: '9%',
-                    position: "absolute",
-                    left: '35.5%'
+                    marginTop:'5%'
                 }
                 }
             >
@@ -30,11 +27,12 @@ function ProfileInfo({ handleOpen,
                         <>
                             <Container>
                                 {/* profile-Avatar */}
-                                <Box sx={{ textAlign: 'center', backgroundColor: '#F4F4F4', marginTop: '5%', boxShadow: '2', padding: '20px' }}>
+                                <Box sx={{textAlign: 'center', backgroundColor: '#F4F4F4', boxShadow: '2', padding: '20px' }}>
                                     <img style={{ cursor: 'pointer' }} src="../../public/profile3.png" alt="" />
-                                    <Typography variant="h6" sx={{ color: 'black' }}>Omar Hassan</Typography>
-                                    <Typography variant="h6" sx={{ color: 'black' }}>Ismailia, EG</Typography>
-                                    <StyledComponents />
+                                    <Typography variant="h6" sx={{ color: '#959191', fontWeight: 'bold' }}>Omar Hassan</Typography>
+                                    <Typography variant="h6" sx={{ color: '#959191', fontWeight: 'bold' }}>Ismailia, EG</Typography>
+                                    <GreenButton>Change Avatar</GreenButton>
+                                    {/* <StyledComponents /> */}
                                 </Box>
                                 {/* Profile-Info */}
                                 <Box
@@ -50,7 +48,7 @@ function ProfileInfo({ handleOpen,
                                                     <Typography
                                                         variant="h4"
                                                         gutterBottom
-                                                        color={"black"}
+                                                        color={"#5daa60"}
                                                         display={"flex"}
                                                         justifyContent={"flex-start"}
                                                         fontWeight={"bold"}
@@ -72,26 +70,27 @@ function ProfileInfo({ handleOpen,
                                                             placeholder='oh.22697@gmail.com'
                                                             value={userData.email}
                                                             variant="outlined"
-                                                            InputLabelProps={{ style: { color: "#6A7575" } }}
+                                                            InputLabelProps={{ style: { color: "#5daa60" } }}
                                                             sx={{
                                                                 "& .MuiOutlinedInput-root": {
                                                                     color: "#6A7575",
-                                                                    borderColor: "#6A7575",
+                                                                    borderColor: "#5daa60", // Set border color to green
                                                                     "&:hover fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Hover color
                                                                     },
-                                                                    "& fieldset": {
-                                                                        borderColor: "black"
+                                                                    "&.fieldset": {
+                                                                        borderColor: "#5daa60"
                                                                     },
                                                                     "&.Mui-focused fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Focused color
                                                                     }
                                                                 },
                                                                 width: "100%",
                                                                 textAlign: "center",
                                                                 "& input": {
-                                                                    height: "15px" // Set your desired height
-                                                                }// Align text center
+                                                                    height: "15px", // Set your desired height
+                                                                    borderColor: "#5daa60" // Input border color
+                                                                }
                                                             }}
                                                         />
                                                     </Grid>
@@ -102,26 +101,27 @@ function ProfileInfo({ handleOpen,
                                                             placeholder='Omar'
                                                             value={userData.firstName}
                                                             variant="outlined"
-                                                            InputLabelProps={{ style: { color: "#6A7575" } }}
+                                                            InputLabelProps={{ style: { color: "#5daa60" } }}
                                                             sx={{
                                                                 "& .MuiOutlinedInput-root": {
                                                                     color: "#6A7575",
-                                                                    borderColor: "#6A7575",
+                                                                    borderColor: "#5daa60", // Set border color to green
                                                                     "&:hover fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Hover color
                                                                     },
-                                                                    "& fieldset": {
-                                                                        borderColor: "black"
+                                                                    "&.fieldset": {
+                                                                        borderColor: "#5daa60"
                                                                     },
                                                                     "&.Mui-focused fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Focused color
                                                                     }
                                                                 },
                                                                 width: "100%",
                                                                 textAlign: "center",
                                                                 "& input": {
-                                                                    height: "15px" // Set your desired height
-                                                                }// Align text center
+                                                                    height: "15px", // Set your desired height
+                                                                    borderColor: "#5daa60" // Input border color
+                                                                }
                                                             }}
                                                         />
                                                     </Grid>
@@ -131,26 +131,27 @@ function ProfileInfo({ handleOpen,
                                                             label="Last Name"
                                                             placeholder='Hassan'
                                                             variant="outlined"
-                                                            InputLabelProps={{ style: { color: "#6A7575" } }}
+                                                            InputLabelProps={{ style: { color: "#5daa60" } }}
                                                             sx={{
                                                                 "& .MuiOutlinedInput-root": {
                                                                     color: "#6A7575",
-                                                                    borderColor: "#6A7575",
+                                                                    borderColor: "#5daa60", // Set border color to green
                                                                     "&:hover fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Hover color
                                                                     },
-                                                                    "& fieldset": {
-                                                                        borderColor: "black"
+                                                                    "&.fieldset": {
+                                                                        borderColor: "#5daa60"
                                                                     },
                                                                     "&.Mui-focused fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Focused color
                                                                     }
                                                                 },
                                                                 width: "100%",
                                                                 textAlign: "center",
                                                                 "& input": {
-                                                                    height: "15px" // Set your desired height
-                                                                }// Align text center
+                                                                    height: "15px", // Set your desired height
+                                                                    borderColor: "#5daa60" // Input border color
+                                                                }
                                                             }}
                                                         />
                                                     </Grid>
@@ -166,25 +167,26 @@ function ProfileInfo({ handleOpen,
                                                             label="Phone Number"
                                                             placeholder='+201066035716'
                                                             variant="outlined"
-                                                            InputLabelProps={{ style: { color: "#6A7575" } }}
+                                                            InputLabelProps={{ style: { color: "#5daa60" } }}
                                                             sx={{
                                                                 "& .MuiOutlinedInput-root": {
                                                                     color: "#6A7575",
-                                                                    borderColor: "#6A7575",
+                                                                    borderColor: "#5daa60", // Set border color to green
                                                                     "&:hover fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Hover color
                                                                     },
-                                                                    "& fieldset": {
-                                                                        borderColor: "black"
+                                                                    "&.fieldset": {
+                                                                        borderColor: "#5daa60"
                                                                     },
                                                                     "&.Mui-focused fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Focused color
                                                                     }
                                                                 },
                                                                 width: "100%",
                                                                 textAlign: "center",
                                                                 "& input": {
-                                                                    height: "15px"
+                                                                    height: "15px", // Set your desired height
+                                                                    borderColor: "#5daa60" // Input border color
                                                                 }
                                                             }}
                                                         />
@@ -195,44 +197,46 @@ function ProfileInfo({ handleOpen,
                                                             label="Birthday"
                                                             placeholder='06|22|1997'
                                                             variant="outlined"
-                                                            InputLabelProps={{ style: { color: "#6A7575" } }}
+                                                            InputLabelProps={{ style: { color: "#5daa60" } }}
                                                             sx={{
                                                                 "& .MuiOutlinedInput-root": {
                                                                     color: "#6A7575",
-                                                                    borderColor: "#6A7575",
+                                                                    borderColor: "#5daa60", // Set border color to green
                                                                     "&:hover fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Hover color
                                                                     },
-                                                                    "& fieldset": {
-                                                                        borderColor: "black"
+                                                                    "&.fieldset": {
+                                                                        borderColor: "#5daa60"
                                                                     },
                                                                     "&.Mui-focused fieldset": {
-                                                                        borderColor: "black"
+                                                                        borderColor: "#5daa60" // Focused color
                                                                     }
                                                                 },
                                                                 width: "100%",
                                                                 textAlign: "center",
                                                                 "& input": {
-                                                                    height: "15px" // Set your desired height
-                                                                }// Align text center
+                                                                    height: "15px", // Set your desired height
+                                                                    borderColor: "#5daa60" // Input border color
+                                                                }
                                                             }}
                                                         />
+
                                                     </Grid>
                                                     <Grid item xs={4} sm={4} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                        <Button variant="contained" href="#contained-buttons" sx={{ backgroundColor: '#606060', textAlign: 'center' }}>
+                                                        <GreenButton variant="contained" href="#contained-buttons" sx={{ backgroundColor: '#606060', textAlign: 'center' }}>
                                                             <ManIcon color='black' />
                                                             Male
-                                                        </Button>
-                                                        <Button variant="contained" href="#contained-buttons" sx={{ backgroundColor: '#606060', textAlign: 'center', marginLeft: '5%' }}>
+                                                        </GreenButton>
+                                                        <GreenButton variant="contained" href="#contained-buttons" sx={{ backgroundColor: '#606060', textAlign: 'center', marginLeft: '5%' }}>
                                                             <Woman2Icon color='black' />
                                                             Female
-                                                        </Button>
+                                                        </GreenButton>
                                                     </Grid>
                                                 </Grid>
 
 
                                                 {/* 3 */}
-                                                <Grid container spacing={2} display={"flex"} marginBottom={5}>
+                                                {/* <Grid container spacing={2} display={"flex"} marginBottom={5}>
                                                     <Grid item xs={4} sm={4}>
                                                         <TextField
                                                             // readOnly
@@ -263,14 +267,14 @@ function ProfileInfo({ handleOpen,
                                                             }}
                                                         />
                                                     </Grid>
-                                                </Grid>
+                                                </Grid> */}
 
 
 
                                                 {/* 4 */}
                                                 <Grid container spacing={2} display={"flex"}>
                                                     <Grid item xs={4} sm={4} >
-                                                        <Button onClick={handleOpen} variant="contained" href="#contained-buttons" sx={{ backgroundColor: '#606060', textAlign: 'center', width: '100%', height: '45px' }}>
+                                                        <Button onClick={handleOpen} variant="contained" href="#contained-buttons" sx={{ backgroundColor: '#5daa60', color:'#fff' , '&:hover':{color:'#5daa60' , backgroundColor:'#fff', border:'2px solid #5daa60'}, textAlign: 'center', width: '100%', height: '45px' }}>
                                                             Update Profile
                                                         </Button>
                                                     </Grid>

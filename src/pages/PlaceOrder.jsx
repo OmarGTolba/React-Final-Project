@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Container,
     AppBar,
@@ -30,12 +30,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import PaymentIcon from '@mui/icons-material/Payment';
 import HomeIcon from '@mui/icons-material/Home';
+import { CartContext } from '../contexts/CartContext';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PaymentCard from './../components/PaymentCard';
+import { Check, CheckBox } from '@mui/icons-material';
 
 const PlaceOrder = () => {
-    const [cartItems, setCartItems] = useState([
-        { id: 1, name: 'T-Shirt', color: 'White', size: 'L', price: 300, quantity: 1, image: 'https://via.placeholder.com/150' },
-        { id: 2, name: 'Skirt', color: 'Black', size: 'L', price: 600, quantity: 2, image: 'https://via.placeholder.com/150' }
-    ]);
+    // const [cartItems, setCartItems] = useState([
+    //     { id: 1, name: 'T-Shirt', color: 'White', size: 'L', price: 300, quantity: 1, image: 'https://via.placeholder.com/150' },
+    //     { id: 2, name: 'Skirt', color: 'Black', size: 'L', price: 600, quantity: 2, image: 'https://via.placeholder.com/150' }
+    // ]);
 
     const [addresses, setAddresses] = useState([
         { id: 1, name: 'Mohamed Ayman Mostafa', address: 'Shbein town, Jasmine Tower, Ismailia Free Zone, Egypt' },
@@ -45,6 +49,7 @@ const PlaceOrder = () => {
         { id: 1, name: 'Mohamed Ayman Mostafa', number: '4556 - 5642 - 0695 - 5168', cvv: '123' },
     ]);
 
+    const { cartItems, updateCartItemQuantity, setCartItems, totalItems } = useContext(CartContext)
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [deleteItemId, setDeleteItemId] = useState(null);
     const [openAddressDialog, setOpenAddressDialog] = useState(false);
@@ -52,6 +57,18 @@ const PlaceOrder = () => {
     const [openCardDialog, setOpenCardDialog] = useState(false);
     const [newCard, setNewCard] = useState({ name: '', number: '', cvv: '' });
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('card');
+    const [name, setName] = useState('');
+    const [selectedAddress, setSelectedAddress] = useState(null)
+    const [selectedCard, setSelectedCard] = useState(null)
+
+    const handleCardClick = (cardId) =>{
+        if(selectedCard === cardId){
+            setSelectedCard(null)
+            console.log('full');
+        }else{
+            setSelectedCard(cardId)
+        }
+    }
 
     const handleQuantityChange = (id, quantity) => {
         setCartItems(cartItems.map(item => item.id === id ? { ...item, quantity } : item));
@@ -74,7 +91,7 @@ const PlaceOrder = () => {
     };
 
     const handleAddAddress = () => {
-        setAddresses([...addresses, { id: addresses.length + 1, name: 'New Address', address: newAddress }]);
+        setAddresses([...addresses, { id: addresses.length + 1, name: name, address: newAddress }]);
         setNewAddress('');
         setOpenAddressDialog(false);
     };
@@ -99,114 +116,166 @@ const PlaceOrder = () => {
         setSelectedPaymentMethod(event.target.value);
     };
 
-    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    const handleAddressClick = (addressId) => {
+        console.log(addressId);
+        if (selectedAddress === addressId) {
+            setSelectedAddress(null);
+        } else {
+            setSelectedAddress(addressId);
+        }
+    }
+
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     return (
         <Container>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        LOGO
-                    </Typography>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={totalItems} color="secondary">
-                            <ShoppingCartIcon />
-                        </Badge>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
 
             <Box mt={4}>
-                <Typography variant="h5" mb={2}>
+                <Typography sx={{marginLeft:'16px',borderBottom:'2px solid #66BB6A', lineHeight:'50px',width:'100%',color:'#66BB6A',fontWeight:'bold',fontSize:'22px', display: 'flex',alignItems: 'center'}} variant="h5" mb={2}>
                     <HomeIcon /> Shipping Address
                 </Typography>
                 <Grid container spacing={2}>
                     {addresses.map(address => (
                         <Grid item xs={12} md={4} key={address.id}>
-                            <Card>
-                                <CardContent>
-                                    <Typography variant="body1">{address.name}</Typography>
-                                    <Typography variant="body2">{address.address}</Typography>
-                                    <Button variant="contained" color="primary" sx={{ mt: 1 }}>Choose</Button>
+                            <Card
+                                sx={{
+                                    position: 'relative',
+                                    '&:hover .circle1': {
+                                        left: '60%',
+                                        transition: 'left 0.4s ease-in-out',
+                                    },
+                                    '&:hover .circle2': {
+                                        left: '-5%',
+                                        transition: 'left 0.4s ease-in-out, top 0.3s ease-in-out',
+                                    },
+                                    '&:hover .circle3': {
+                                        left: '60%',
+                                        transition: 'left 0.4s ease-in-out, top 0.3s ease-in-out',
+                                    },
+                                    '.blur-on-hover:hover': {
+                                        filter: 'blur(4px)',
+                                    },
+                                    '&:hover .content': { scale: '5px' },
+                                    minHeight: '250px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    flexDirection: 'column',
+                                    alignContent: 'center',
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => handleAddressClick(address.id)}
+                            >
+                                <CardContent className='content' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', alignContent: 'center' }}>
+                                    {
+                                        selectedAddress === address.id ?
+                                            <CheckCircleIcon sx={{ color: "#5CA95F" }} />
+                                            :
+                                            <>
+                                                <Typography sx={{fontWeight:'bold', marginBottom: '10px', marginTop: '5px' }} variant="body1">{address.name}</Typography>
+                                                <Typography sx={{ marginBottom: '10px' }} variant="body2">{address.address}</Typography>
+                                            </>
+                                    }
+                                    {/* <Button variant="contained" color="primary" sx={{ mt: 1 }}>Choose</Button> */}
                                 </CardContent>
+                                <Box className='circle1' sx={{ width: '50%', height: '100%', borderRadius: '50%', backgroundColor: '#5DAA60', position: 'absolute', left: '-10px', top: '-45%', opacity: '15%', transition: 'left 0.5s ease-in-out, top 0.3s ease-in-out', filter: 'blur(20px)' }}>
+                                </Box>
+                                <Box className='circle2 ' sx={{ width: '50%', height: '140%', borderRadius: '50%', backgroundColor: '#5DAA60', position: 'absolute', left: '55%', top: '-10%', opacity: '15%', transition: 'left 0.5s ease-in-out, top 0.3s ease-in-out', filter: 'blur(20px)' }}>
+                                </Box>
+                                <Box className='circle3' sx={{ width: '50%', height: '100%', borderRadius: '50%', backgroundColor: '#5DAA60', position: 'absolute', left: '-10px', top: '40%', opacity: '15%', transition: 'left 0.5s ease-in-out, top 0.3s ease-in-out', filter: 'blur(20px)' }}>
+                                </Box>
                             </Card>
                         </Grid>
                     ))}
                     <Grid item xs={12} md={4}>
-                        <Button variant="outlined" color="primary" startIcon={<AddIcon />} onClick={() => setOpenAddressDialog(true)}>
-                            Add new address
-                        </Button>
+                    <Card onClick={() => setOpenAddressDialog(true)}
+                        sx={{
+                            position: 'relative',
+                            '&:hover .circle1': {
+                                left: '60%',
+                                transition: 'left 0.4s ease-in-out',
+                            },
+                            '&:hover .circle2': {
+                                left: '-5%',
+                                transition: 'left 0.4s ease-in-out, top 0.3s ease-in-out',
+                            },
+                            '&:hover .circle3': {
+                                left: '60%',
+                                transition: 'left 0.4s ease-in-out, top 0.3s ease-in-out',
+                            },
+                            '.blur-on-hover:hover': {
+                                filter: 'blur(4px)',
+                            },
+                            '&:hover .content': { scale: '5px' },
+                            minHeight: '250px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            flexDirection: 'column',
+                            alignContent: 'center',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        <CardContent className='content' sx={{fontSize:'20px',fontWeight:'bold', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', alignContent: 'center' }}>
+                            Add another
+                        </CardContent>
+                        <Box className='circle1' sx={{ width: '50%', height: '100%', borderRadius: '50%', backgroundColor: '#5DAA60', position: 'absolute', left: '-10px', top: '-45%', opacity: '15%', transition: 'left 0.5s ease-in-out, top 0.3s ease-in-out', filter: 'blur(20px)' }}>
+                        </Box>
+                        <Box className='circle2 ' sx={{ width: '50%', height: '140%', borderRadius: '50%', backgroundColor: '#5DAA60', position: 'absolute', left: '55%', top: '-10%', opacity: '15%', transition: 'left 0.5s ease-in-out, top 0.3s ease-in-out', filter: 'blur(20px)' }}>
+                        </Box>
+                        <Box className='circle3' sx={{ width: '50%', height: '100%', borderRadius: '50%', backgroundColor: '#5DAA60', position: 'absolute', left: '-10px', top: '40%', opacity: '15%', transition: 'left 0.5s ease-in-out, top 0.3s ease-in-out', filter: 'blur(20px)' }}>
+                        </Box>
+                    </Card>
+
                     </Grid>
                 </Grid>
 
                 <Box mt={4}>
-                    <Typography variant="h5" mb={2} display={'flex'} justifyContent={'space-between'}>
-                        <Typography variant="h5" ml={2}><ShoppingCartIcon /> Your Order</Typography>  <Typography variant="h6" ml={2}>Items</Typography>
+                    <Typography variant="h5" mb={2}  display={'flex'} justifyContent={'space-between'} flexDirection={'column'}>
+                        <Typography variant="h5" sx={{borderBottom:'2px solid #66BB6A', lineHeight:'50px',color:'#66BB6A',fontWeight:'bold',fontSize:'22px', display: 'flex',alignItems: 'center'}} width={'100%'} ml={2}><ShoppingCartIcon /> Your Order</Typography>  
+                        <Typography variant="h5" sx={{display:'flex',marginTop:'15px'}}>
+                            <Typography variant="h5" sx={{backgroundColor:'#66BB6A', padding:'0px 8px', borderRadius:'8px',fontWeight:'bold',color:'white', fontSize:'17px',display:'flex',justifyContent:'center',alignItems:'center'}} ml={2}>{cartItems.length}</Typography>  
+                            <Typography sx={{color:'#66BB6A',fontWeight:'bold'}} variant="h6" ml={2}>Items</Typography>
+                        </Typography>  
                     </Typography>
                     {cartItems.map(item => (
-                        <Paper key={item.id} sx={{ p: 2, mb: 2 }}>
-                            <Grid container spacing={2} alignItems="center">
-                                <Grid item xs={12} md={1}>
-                                    <Avatar variant="square" src={item.image} sx={{ width: 56, height: 56 }} />
+                        // <Paper key={item.id} sx={{ p: 2, mb: 2 , display:'flex' }}>
+                            <Grid key={item.id} container spacing={2} alignItems="center" sx={{display:'flex', alignItems:'flex-start', height:'245px'}}>
+                                <Grid item xs={12} md={4} sx={{width:'100%', height:'280px', }}>
+                                    <Avatar variant="square" src={item.image} sx={{ width: '100%', height: '80%',borderRadius:'7px' }} />
                                 </Grid>
-                                <Grid item xs={12} md={3}>
-                                    <Typography variant="h6">{item.name}</Typography>
-                                    <Typography>Color: {item.color}</Typography>
-                                    <Typography>Size: {item.size}</Typography>
-                                </Grid>
-                                <Grid item xs={12} md={2}>
-                                    <Typography variant="h6">{item.price} EGP</Typography>
-                                </Grid>
-                                <Grid item xs={12} md={2}>
-                                    <TextField
-                                        type="number"
-                                        value={item.quantity}
-                                        onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value, 10))}
-                                        inputProps={{ min: 1 }}
-                                        fullWidth
-                                    />
-                                </Grid>
-                                <Grid item xs={12} md={2}>
-                                    <Typography variant="h6">{item.price * item.quantity} EGP</Typography>
-                                </Grid>
-                                <Grid item xs={12} md={1}>
-                                    <IconButton color="secondary" onClick={() => handleDelete(item.id)}>
-                                        <DeleteIcon />
-                                    </IconButton>
+                                <Grid item xs={12} md={6}>
+                                    <Typography variant="h6" sx={{marginBottom:'10px',fontWeight:'bold'}}>{item.name}</Typography>
+                                    <Typography variant="h6" sx={{marginBottom:'10px',fontWeight:'bold'}}>{item.price} EGP</Typography>
+                                    <Typography variant="h6" sx={{marginBottom:'10px',fontWeight:'bold'}}>Quantity:{ item.quantity}</Typography>
+                                    <Typography variant="h6" sx={{marginBottom:'10px',fontWeight:'bold'}}>Total:{item.price * item.quantity}</Typography>
                                 </Grid>
                             </Grid>
-                        </Paper>
+                        // </Paper>
                     ))}
                     <Box mt={4}>
-                        <Typography variant="h5">Total: {totalPrice} EGP</Typography>
+                        <Typography sx={{fontWeight:'bold'}} variant="h5">Total: {totalPrice} EGP</Typography>
                     </Box>
                 </Box>
 
                 <Box mt={4}>
-                    <Typography variant="h5" mb={2}>
+                    <Typography sx={{borderBottom:'2px solid #66BB6A', lineHeight:'50px',color:'#66BB6A',fontWeight:'bold',fontSize:'22px', display: 'flex',alignItems: 'center'}} variant="h5" mb={2}>
                         <PaymentIcon /> Payment
                     </Typography>
                     <FormControl component="fieldset">
-                        <FormLabel component="legend">Select Payment Method</FormLabel>
-                        <RadioGroup aria-label="payment-method" name="payment-method" value={selectedPaymentMethod} onChange={handlePaymentMethodChange}>
-                            <FormControlLabel value="card" control={<Radio />} label="Credit Card" />
-                            <FormControlLabel value="cash" control={<Radio />} label="Cash on Delivery" />
-                            <FormControlLabel value="paypal" control={<Radio />} label="Paypal" />
+                        <FormLabel  sx={{borderBottom:'2px solid #66BB6A', lineHeight:'50px',color:'#66BB6A',fontWeight:'bold',fontSize:'17px', display: 'flex',alignItems: 'center'}} component="legend">Select Payment Method</FormLabel>
+                        <RadioGroup sx={{display:'flex'}} aria-label="payment-method" name="payment-method" value={selectedPaymentMethod} onChange={handlePaymentMethodChange}>
+                            <FormControlLabel sx={{backgroundColor: selectedPaymentMethod === 'card'? '#66BB6A' : '', color: selectedPaymentMethod === 'card'? '#fff' : '' }} value="card" control={<Radio sx={{color:'#66BB6A','&.Mui-checked': { color: '#66BB6A' }}} />} label="Credit Card" />
+                            <FormControlLabel sx={{backgroundColor: selectedPaymentMethod === 'cash'? '#66BB6A' : '', color: selectedPaymentMethod === 'cash'? '#fff' : '' }} value="cash" control={<Radio sx={{color:'#66BB6A','&.Mui-checked': { color: '#66BB6A' }}} />} label="COD" />
+                            <FormControlLabel sx={{backgroundColor: selectedPaymentMethod === 'paypal'? '#66BB6A' : '', color: selectedPaymentMethod === 'paypal'? '#fff' : '' }} value="paypal" control={<Radio sx={{color:'#66BB6A','&.Mui-checked': { color: '#66BB6A' }}} />} label="Paypal" />
                         </RadioGroup>
                     </FormControl>
 
                     {selectedPaymentMethod === 'card' && (
                         <Grid container spacing={2} mt={2}>
                             {cards.map(card => (
-                                <Grid item xs={12} md={4} key={card.id}>
-                                    <Card>
-                                        <CardContent>
-                                            <Typography variant="body1">{card.name}</Typography>
-                                            <Typography variant="body2">Number: {card.number}</Typography>
-                                            <Typography variant="body2">CVV: {card.cvv}</Typography>
-                                        </CardContent>
-                                    </Card>
+                                <Grid key={card.id} xs={3.5}>
+                                    <PaymentCard cards={card} selectedCard={selectedCard} setSelectedCard={setSelectedCard} handleCardClick={handleCardClick}/>
                                 </Grid>
                             ))}
                             <Grid item xs={12} md={4}>
@@ -247,6 +316,24 @@ const PlaceOrder = () => {
             <Dialog open={openAddressDialog} onClose={handleAddressDialogClose}>
                 <DialogTitle>Add New Address</DialogTitle>
                 <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        label="Name"
+                        type="text"
+                        fullWidth
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        label="Name"
+                        type="text"
+                        fullWidth
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
                     <TextField
                         autoFocus
                         margin="dense"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Box,
     Card,
@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { AddCircleOutline, Close } from '@mui/icons-material';
 import { styled } from '@mui/system';
+import PaymentCard from '../components/PaymentCard';
 
 const PaymentMethodsContainer = styled(Box)({
     display: 'flex',
@@ -20,7 +21,7 @@ const PaymentMethodsContainer = styled(Box)({
 });
 
 const AddMethodCard = styled(Card)({
-    border: '2px dashed #ccc',
+    border: '2px dashed #66BB6A    ',
     padding: '20px',
     width: '200px',
     height: '150px',
@@ -30,16 +31,6 @@ const AddMethodCard = styled(Card)({
     alignItems: 'center',
     cursor: 'pointer',
     textAlign: 'center',
-});
-
-const PaymentCard = styled(Card)({
-    padding: '20px',
-    width: '200px',
-    height: '150px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
 });
 
 const ModalContent = styled(Box)({
@@ -55,32 +46,41 @@ const ModalContent = styled(Box)({
 });
 
 function Payment() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [cardDetails, setCardDetails] = useState({
+        name: '',
+        number: '',
+    });
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setCardDetails((prevDetails) => ({
+            ...prevDetails,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setOpen(false);
+    };
+
     return (
-        <Box position={"fixed"} left={'40%'} top={"5%"} >
-            <Typography variant="h4" component="h1" align="center">
+        <Box>
+            <Typography sx={{ marginTop: '10%', padding: '10px', textAlign: 'left' }} variant="h4" component="h1" align="center">
                 Your Payment Methods
             </Typography>
-            <PaymentMethodsContainer>
-                <AddMethodCard onClick={handleOpen}>
-                    <AddCircleOutline fontSize="large" />
-                    <Typography>Add Method</Typography>
+            <PaymentMethodsContainer sx={{ padding: '10px' }}>
+                <AddMethodCard onClick={handleOpen} sx={{ width: '60%' }}>
+                    <Box sx={{color:'#66BB6A', fontWeight:'bold' , fontSize:'80px'}}>+</Box>
+                    <Typography sx={{color:"#66BB6A"}}>Add Method</Typography>
                 </AddMethodCard>
-                <PaymentCard>
-                    <CardContent>
-                        <img
-                            src="https://via.placeholder.com/150"
-                            alt="Credit Card"
-                            style={{ width: '100%', height: 'auto', marginBottom: '10px' }}
-                        />
-                        <Typography variant="body1">John Doe</Typography>
-                        <Typography variant="body2">1234 5678 9012 3456</Typography>
-                    </CardContent>
-                </PaymentCard>
+                {
+                    <PaymentCard name={cardDetails.name} number={cardDetails.number} />
+                }
             </PaymentMethodsContainer>
             <Modal open={open} onClose={handleClose}>
                 <ModalContent>
@@ -93,43 +93,24 @@ function Payment() {
                     <Typography variant="h6" component="h2">
                         Add New Payment Method
                     </Typography>
-                    <form style={{ marginTop: '20px' }}>
+                    <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
                         <TextField
                             fullWidth
                             label="Name on Card"
-                            name="cardName"
+                            name="name"
                             margin="normal"
                             required
+                            onChange={handleChange}
                         />
                         <TextField
                             fullWidth
                             label="Card Number"
-                            name="cardNumber"
+                            name="number"
                             margin="normal"
                             required
+                            onChange={handleChange}
                         />
-                        <Button
-                            variant="contained"
-                            component="label"
-                            fullWidth
-                            style={{ marginTop: '20px' }}
-                        >
-                            Upload Card Image
-                            <input
-                                type="file"
-                                name="cardImage"
-                                hidden
-                                accept="image/*"
-                                required
-                            />
-                        </Button>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            fullWidth
-                            style={{ marginTop: '20px' }}
-                        >
+                        <Button type="submit" variant="contained" color="primary" sx={{ marginTop: '20px' }}>
                             Add Card
                         </Button>
                     </form>

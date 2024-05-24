@@ -6,7 +6,7 @@ import Sidebar from '../components/Sidebar';
 import Address from './Address';
 import Orders from './Orders';
 import Payment from './Payment';
-import { Stack } from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
 
 
 const drawerWidth = 300;
@@ -50,48 +50,57 @@ export default function Profile() {
 
 
     return (
-        <Stack sx={{ display: 'flex', minHeight: '89vh' }}>
-            <CssBaseline />
+        <Box sx={{ width: selectedIndex === 1 ? '72%' : 'auto', display: 'flex' }}>
+            {/* <CssBaseline /> */}
+
             <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} />
-            <ProfileInfo
-                handleOpen={handleOpen}
-                handleClose={handleClose}
-                handleChange={handleChange}
-                handleConfirm={handleConfirm}
-                userData={userData}
-                open={open}
-                selectedIndex={selectedIndex}
-            />
+            {
+                selectedIndex === 0 && (
+                    <div style={{width:'100%'}}>
+                        {/* <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} /> */}
+                        <ProfileInfo
+                            handleOpen={handleOpen}
+                            handleClose={handleClose}
+                            handleChange={handleChange}
+                            handleConfirm={handleConfirm}
+                            userData={userData}
+                            open={open}
+                            selectedIndex={selectedIndex}
+                        />
+                    </div>
+                )
+            }
 
 
             {/* Order-Section */}
             {
                 selectedIndex === 1 && (
-                    <>
-                        <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} />
+                    <div style={{width:'100%'}}>
+                        {/* <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} /> */}
                         <Orders />
-                    </>
+                    </div>
                 )
             }
             {/* Address-Section */}
 
             {
                 selectedIndex === 2 && (
-                    <>
-                        <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} />
+                    <Box sx={{width:'100%' }}>
+                        {/* <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} /> */}
                         <Address />
-                    </>
+                    </Box>
                 )
             }
             {/* Payment-Section */}
             {
                 selectedIndex === 3 && (
-                    <>
-                        <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} />
+                    <Box sx={{ marginLeft:'2%', width:'50%'}}>
+                        {/* <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} /> */}
                         <Payment />
-                    </>
+                    </Box>
                 )
             }
-        </Stack>
+        </Box>
+
     );
 }

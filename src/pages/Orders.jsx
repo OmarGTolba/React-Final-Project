@@ -1,153 +1,240 @@
-import { useState } from 'react';
-import {
-    Container,
-    Typography,
-    Box,
-    Button,
-    Card,
-    CardContent,
-    CardActions,
-    Modal,
-    TextField,
-    Grid,
-    Paper,
-} from '@mui/material';
+import React, { useState } from 'react';
+import { Container, Box, ButtonBase, Typography, Grid, Card } from '@mui/material';
+import OrderCard from '../components/OrderCard';
+import AuctionCard from '../components/AuctionCard';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import CompletedBidCard from '../components/CompletedBidCard';
+import CompletedOrderCard from '../components/CompletedOrderCard';
 
-function Address() {
-    const [open, setOpen] = useState(false);
-    const [rating, setRating] = useState('');
+const activeBidsObj = [
+    {
+        id: 1,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/clothes.jpg',
+        yourBid: 20,
+        highestBid: 50,
+        timeLeft: '2 hours left',
+        // bidder:'YOU LOST'
+    },
+    {
+        id: 2,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/labtop.jpg',
+        yourBid: 20,
+        highestBid: 50,
+        timeLeft: '2 hours left',
+        // bidder:'YOU WON'
+    }
+    // Add more items...
+];
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+const pendingOrdersObj = [
+    {
+        id: 1,
+        title: 'Hair and face care by Curology',
+        image: '../../public/shmpo.jpg',
+    },
+    {
+        id: 2,
+        title: 'Hair and face care by Curology',
+        image: '../../public/shmpo.jpg',
+    },
+    // Add more items...
+];
 
-    const handleRateChange = (event) => {
-        setRating(event.target.value);
+const completedBids = [
+    {
+        id: 1,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/clothes.jpg',
+        yourBid: 20,
+        highestBid: 50,
+        bidder:'YOU LOST',
+        checkWinner:'win'
+    },
+    {
+        id: 2,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/labtop.jpg',
+        yourBid: 20,
+        highestBid: 50,
+        bidder:'YOU WON',
+        checkWinner:'lost'
+    }
+    ,
+    {
+        id: 3,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/labtop.jpg',
+        yourBid: 20,
+        highestBid: 50,
+        bidder:'YOU WON',
+        checkWinner:'lost'
+    }
+    ,
+    {
+        id: 4,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/labtop.jpg',
+        yourBid: 20,
+        highestBid: 50,
+        bidder:'YOU WON',
+        checkWinner:'lost'
+    }
+    // Add more items...
+];
+
+const completedOrders = [
+    {
+        id: 1,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/clothes.jpg',
+        status:'Delivered'
+    },
+    {
+        id: 2,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/labtop.jpg',
+        status:'Delivered'
+    },
+    {
+        id: 3,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/labtop.jpg',
+        status:'Delivered'
+    },
+    {
+        id: 4,
+        title: 'Macbook Air MGN63 13" Apple M1 Chip With 8-Core Processor',
+        image: '../../public/labtop.jpg',
+        status:'Delivered'
+    }
+    // Add more items...
+];
+
+
+function Orders() {
+    const [activeTab, setActiveTab] = useState('active');
+
+    const handleTabToggle = (tab) => {
+        setActiveTab(tab);
     };
 
-    const handleRateSubmit = () => {
-        console.log(`Rating submitted: ${rating}`);
-        handleClose();
+
+    const sliderSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3, // Show up to 3 slides or less if there are fewer items
+        slidesToScroll: 2, 
+        // centerMode: true,
+        // leftMode:true
     };
 
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
-        bgcolor: 'background.paper',
-        boxShadow: 24,
-        p: 4,
-    };
 
     return (
-        <Container sx={{}}>
-            <Box sx={{ p: 3, width: '70%', position: 'relative', left: '30%', marginTop: '8%' }}>
-                <Typography variant="h5" gutterBottom>
-                    Orders
-                </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                    View the delivery status for items and your order history
-                </Typography>
+        <Container sx={{ position: 'relative', width: '100%' }}>
+        {/* Green box containing toggle buttons */}
+        <Box bgcolor="#5DAA60" display={'flex'} p={2} mb={4} padding={1.5} borderRadius={'0px 0px 20px 20px'} width={'21%'} justifyContent={'center'}>
+            <ButtonBase
+                onClick={() => handleTabToggle('active')}
+                sx={{
+                    bgcolor: activeTab === 'active' && '#5DAA60',
+                    color: 'white',
+                    borderBottom: activeTab === 'active' && '4px solid white',
+                    mr: 2,
+                    borderRadius: 1, // Added border radius
+                    padding: '0px 0px'
+                }}
+            >
+                <Typography variant="button">Active</Typography>
+            </ButtonBase>
+            <ButtonBase
+                onClick={() => handleTabToggle('complete')}
+                sx={{
+                    bgcolor: activeTab === 'complete' && '#5DAA60',
+                    color: 'white',
+                    borderBottom: activeTab === 'complete' && '4px solid white',
+                    borderRadius: 1, // Added border radius
+                    padding: '0px 0px'
+                }}
+            >
+                <Typography variant="button">Complete</Typography>
+            </ButtonBase>
+        </Box>
 
-                <Box sx={{ mb: 4 }}>
-                    <Typography variant="h6" gutterBottom>
-                        Completed
+        {/* Render cards based on active tab */}
+        {activeTab === 'active' && (
+            <>
+                <Box mb={4}>
+                    <Typography variant="h6" component="h2" fontWeight="bold" mb={2}>
+                        Active Bids
                     </Typography>
-                    <Paper sx={{ p: 2, bgcolor: 'grey.100' }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                            <Card sx={{ display: 'flex', width: '100%' }}>
-                                <Box
-                                    component="img"
-                                    sx={{ width: 150, height: 150, bgcolor: 'grey.300', alignSelf: 'center', m: 2 }}
-                                />
-                                <Box sx={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto', p: 2 }}>
-                                    <CardContent sx={{ flex: '1 0 auto' }}>
-                                        <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-                                            Delivered on Sunday, 28th Apr
-                                        </Typography>
-                                        <Typography variant="h6" component="div">
-                                            Galaxy A14 Dual Sim Black 4GB RAM
-                                            <br />
-                                            128GB 4G - Middle East Version
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button sx={{ backgroundColor: '#494949' }} variant="contained" onClick={handleOpen}>
-                                            Rate the seller
-                                        </Button>
-                                    </CardActions>
+                    <Card style={{ width: '100%', overflow: 'hidden' }}>
+                        <Slider {...sliderSettings} >
+                            {activeBidsObj.map(item => (
+                                <Box key={item.id}sx={{marginLeft:'100px' , backgroundColor:'#E6E6E6'}}>
+                                    <AuctionCard item={item} />
                                 </Box>
-                            </Card>
-                        </Box>
-                    </Paper>
+                            ))}
+                        </Slider>
+                    </Card>
                 </Box>
-
-                <Box>
-                    <Typography variant="h6" gutterBottom>
-                        Bids
+            
+                <Box mb={4}>
+                    <Typography variant="h6" component="h2" fontWeight="bold" mb={2}>
+                        Pending Orders
                     </Typography>
-                    <Typography variant="subtitle1" gutterBottom>
-                        Active
-                    </Typography>
-                    <Paper sx={{ p: 2, bgcolor: 'grey.100' }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                            <Card sx={{ display: 'flex', width: '100%' }}>
-                                <Box
-                                    component="img"
-                                    sx={{ width: 150, height: 150, bgcolor: 'grey.300', alignSelf: 'center', m: 2 }}
-                                />
-                                <Box sx={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto', p: 2 }}>
-                                    <CardContent sx={{ flex: '1 0 auto' }}>
-                                        <Typography variant="h6" component="div">
-                                            Galaxy A14 Dual Sim Black 4GB RAM
-                                            <br />
-                                            128GB 4G - Middle East Version
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary" gutterBottom>
-                                            Your last bid: <Box component="span" sx={{ fontWeight: 'bold' }}>$20</Box>
-                                            <br />
-                                            Highest bid: <Box component="span" sx={{ fontWeight: 'bold' }}>$25</Box>
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button sx={{ backgroundColor: '#494949' }} variant="contained">Go to bid page</Button>
-                                    </CardActions>
+                    <Card style={{ width: '100%', overflow: 'hidden' }}>
+                        <Slider {...sliderSettings} >
+                            {pendingOrdersObj.map(order => (
+                                <Box key={order.id} sx={{marginLeft:'100px' , backgroundColor:'#E6E6E6'}}>
+                                    <OrderCard order={order} />
                                 </Box>
-                            </Card>
-                        </Box>
-                    </Paper>
+                            ))}
+                        </Slider>
+                    </Card>
                 </Box>
-            </Box>
+            </>
+        )}
+        {activeTab === 'complete' && (
+            <>
 
-            <Modal open={open} onClose={handleClose}>
-                <Box sx={style}>
-                    <Typography variant="h6" component="h2" gutterBottom>
-                        Rate the Seller
+                <Box mb={4}>
+                    <Typography variant="h6" component="h2" fontWeight="bold" mb={2}>
+                        Completed Bids
                     </Typography>
-                    <TextField
-                        fullWidth
-                        label="Rating"
-                        variant="outlined"
-                        value={rating}
-                        onChange={handleRateChange}
-                    />
-                    <Grid container spacing={2} sx={{ mt: 2 }}>
-                        <Grid item>
-                            <Button sx={{ backgroundColor: '#494949' }} variant="contained" onClick={handleRateSubmit}>
-                                Submit
-                            </Button>
-                        </Grid>
-                        <Grid item>
-                            <Button sx={{ backgroundColor: '#494949' }} variant="outlined" onClick={handleClose}>
-                                Cancel
-                            </Button>
-                        </Grid>
-                    </Grid>
+                    <Card style={{ width: '100%', overflow: 'hidden' }}>
+                        <Slider {...sliderSettings} >
+                            {completedBids.map(item => (
+                                <Box key={item.id} sx={{marginLeft:'100px' , backgroundColor:'#E6E6E6'}}>
+                                    <CompletedBidCard item={item} />
+                                </Box>
+                            ))}
+                        </Slider>
+                    </Card>
                 </Box>
-            </Modal>
-        </Container>
+
+                <Box mb={4}>
+                    <Typography variant="h6" component="h2" fontWeight="bold" mb={2}>
+                        Completed Orders
+                    </Typography>
+                    <Card sx={{ width: '100%', overflow: 'hidden' }}>
+                        <Slider {...sliderSettings} >
+                            {completedOrders.map(order => (
+                                <Box key={order.id} sx={{marginLeft:'100px' , backgroundColor:'#E6E6E6'}}>
+                                    <CompletedOrderCard order={order} />
+                                </Box>
+                            ))}
+                        </Slider>
+                    </Card>
+                </Box>
+            </>
+        )}
+    </Container>
     );
 }
 
-export default Address;
+export default Orders;

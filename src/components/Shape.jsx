@@ -5,9 +5,9 @@ function Shape() {
         <div>
             <Box
                 sx={{
-                    width: '120px',
+                    width: '60px',
                     height: '100%',
-                    backgroundColor: '#7B7B7B',
+                    backgroundColor: 'white',
                 }}
             ></Box>
         </div>

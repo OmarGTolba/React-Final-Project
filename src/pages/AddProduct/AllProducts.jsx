@@ -171,7 +171,7 @@ setDisplayedProducts(dp)
 {/* <ProductCard></ProductCard> */}
 {/* <ProductCard title='sdas' price='10'></ProductCard> */}
 {currentProducts?.map((product)=>(
-<ProductCard title={product?.title} price={product?.price}  category={product?.categoryId?.title}  location={product?.location}></ProductCard>
+<ProductCard key={product.title} title={product?.title} price={product?.price}  category={product?.categoryId?.title}  location={product?.location}></ProductCard>
 
 ))}
         </Box>
