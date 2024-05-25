@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Card, CardActions, CardContent, Button, Typography, Box, CardMedia } from '@mui/material';
 
-const FlipCard = ({children}) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+const AboutCard = ({children}) => {
+ 
   const [showOverlay, setShowOverlay] = useState(false);
 
   const handleCardFlip = () => {
-    setIsFlipped(!isFlipped);
-    if (!isFlipped) {
+    if (!showOverlay) {
       setTimeout(() => {
         setShowOverlay(true);
-      }, 400); 
+      }, 100); 
     } else {
       setShowOverlay(false);
     }
@@ -29,18 +28,17 @@ const FlipCard = ({children}) => {
       <Card
         sx={{
 zIndex:'3',
-          width: '200px',
-          height:'150px',
+          width: '300px',
+          height:'400px',
           transformStyle: 'preserve-3d', 
           transition: 'transform 0.6s',
-          transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)', 
         }}
       >
         <CardContent>
         <CardMedia
         sx={{ height: 140 ,
           zIndex:'3',
-          opacity: isFlipped ? 0.3 : 1,
+          opacity: showOverlay ? 0.3 : 1,
         }}
         image="../public/PlaceholderGlossary.svg"
         title="green iguana"
@@ -48,9 +46,7 @@ zIndex:'3',
         </CardContent>
         <CardActions>
         </CardActions>
-      </Card>
-      {/* Overlay */}
-      {showOverlay && (
+        {showOverlay && (
         <Box
           sx={{
             position: 'absolute',
@@ -70,8 +66,11 @@ zIndex:'3',
 {children}
         </Box>
       )}
+      </Card>
+      {/* Overlay */}
+      
     </div>
   );
 };
 
-export default FlipCard;
+export default AboutCard;
