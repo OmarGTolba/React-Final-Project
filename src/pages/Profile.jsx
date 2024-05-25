@@ -16,6 +16,8 @@ export default function Profile() {
 const token = localStorage.getItem('token')
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [open, setOpen] = useState(false);
+    const [userData, setUserData] = useState({});
+  
     const [userData, setUserData] = useState({
         name: '',
         email: '',
@@ -23,7 +25,8 @@ const token = localStorage.getItem('token')
     });
 
 const [user,setUser] = useState({})    
-    const handleOpen = () => {
+
+const handleOpen = () => {
         setOpen(true);
     };
 
@@ -71,7 +74,7 @@ const [user,setUser] = useState({})
           }
           const data = await response.json();
         
-          setUser(data.result)
+          setUserData(data.result)
           console.log(data.result);
         } catch (error) {
           console.error('Error fetching categories:', error);

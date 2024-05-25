@@ -64,10 +64,10 @@ function ProfileInfo({ handleOpen,
                                                 <Grid container spacing={2} display={"flex"} marginBottom={5} >
                                                     <Grid item xs={4} sm={4}>
                                                         <TextField
-                                                            // readOnly
+                                                             readOnly
                                                             id="email"
-                                                            label="Email"
-                                                            placeholder='oh.22697@gmail.com'
+                                                            label="email"
+
                                                             value={userData.email}
                                                             variant="outlined"
                                                             InputLabelProps={{ style: { color: "#5daa60" } }}
@@ -97,9 +97,9 @@ function ProfileInfo({ handleOpen,
                                                     <Grid item xs={4} sm={4}>
                                                         <TextField
                                                             id="firstName"
-                                                            label="First Name"
-                                                            placeholder='Omar'
-                                                            value={userData.firstName}
+                                                            label={userData.firstName}
+                                                            placeholder={userData.firstName}
+ 
                                                             variant="outlined"
                                                             InputLabelProps={{ style: { color: "#5daa60" } }}
                                                             sx={{
@@ -128,8 +128,8 @@ function ProfileInfo({ handleOpen,
                                                     <Grid item xs={4} sm={4}>
                                                         <TextField
                                                             id="lastName"
-                                                            label="Last Name"
-                                                            placeholder='Hassan'
+                                                            label={userData.lastName}
+                                                            placeholder={userData.lastName}
                                                             variant="outlined"
                                                             InputLabelProps={{ style: { color: "#5daa60" } }}
                                                             sx={{
