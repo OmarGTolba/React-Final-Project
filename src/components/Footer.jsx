@@ -47,7 +47,7 @@ const Footer = () => {
                 variant="filled"
                 placeholder="Enter Your E-mail to subscribe"
                 sx={{ bgcolor: 'white', borderRadius: 1, mr: 2, width: '70%' }}
-              />
+                />
               <Button sx={{
                 height: '65%',
                 backgroundColor: '#F0F8F0',
@@ -70,6 +70,9 @@ const Footer = () => {
             </Box>
           </Box>
         </Box>
+      </Container>
+    </Box>
+              </Grid>
       </Container>
     </Box>
   );
