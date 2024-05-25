@@ -26,9 +26,9 @@ export default function Auth() {
         "http://localhost:3000/api/v1/auth/login",
         signInForm
       );
-      console.log(response.data.token);
-      setToken(response.data.token);
-      localStorage.setItem("token", response.data.token);
+      console.log(response.data.user.token);
+      setToken(response.data.user.token);
+      localStorage.setItem("token", response.data.user.token);
     } catch (error) {
       console.error("Signup failed:", error);
     }
@@ -39,7 +39,8 @@ export default function Auth() {
     firstName: "",
     lastName: "",
     email: "",
-    birthday: "",
+    birthDay: "",
+    phoneNumber:"",
     password: "",
     confirmPassword: "",
   });
@@ -172,6 +173,50 @@ export default function Auth() {
           creaate your account
         </Typography>
         <Box margin={3}>
+        
+        <TextField
+            sx={{
+              width: "50%",
+              marginBottom: "16px",
+              backgroundColor: "rgba(0, 255, 0, 0.1)",
+              "& .MuiInput-underline:after": {
+                borderBottomColor: "rgb(150, 187, 124)",
+                color: "rgb(150, 187, 124)",
+              },
+              "& .MuiOutlinedInput-root": {
+                "&.Mui-focused fieldset": {
+                  borderColor: "rgb(150, 187, 124)",
+                },
+              },
+            }}
+            InputLabelProps={{ style: { color: "#79987a" } }}
+            label="firstName"
+            name="firstName"
+            value={signUpForm.firstName}
+            onChange={handleSignUpInputChange}
+          />
+            <TextField
+            sx={{
+              width: "50%",
+              marginBottom: "16px",
+              backgroundColor: "rgba(0, 255, 0, 0.1)",
+              "& .MuiInput-underline:after": {
+                borderBottomColor: "rgb(150, 187, 124)",
+                color: "rgb(150, 187, 124)",
+              },
+              "& .MuiOutlinedInput-root": {
+                "&.Mui-focused fieldset": {
+                  borderColor: "rgb(150, 187, 124)",
+                },
+              },
+            }}
+            InputLabelProps={{ style: { color: "#79987a" } }}
+            label="lastName"
+            name="lastName"
+            value={signUpForm.lastName}
+            onChange={handleSignUpInputChange}
+          />
+        
           <TextField
             sx={{
               width: "100%",
@@ -188,7 +233,7 @@ export default function Auth() {
               },
             }}
             InputLabelProps={{ style: { color: "#79987a" } }}
-            label="Email"
+            label="email"
             name="email"
             value={signUpForm.email}
             onChange={handleSignUpInputChange}
@@ -232,9 +277,9 @@ export default function Auth() {
               marginBottom: "16px",
               backgroundColor: "rgba(0, 255, 0, 0.1)",
             }}
-            label="birthday"
-            name="birthday"
-            value={signUpForm.birthday}
+            label="birthDay"
+            name="birthDay"
+            value={signUpForm.birthDay}
             onChange={handleSignUpInputChange}
           />
         </Box>
@@ -297,7 +342,7 @@ export default function Auth() {
             label="Email"
             name="email"
             value={signInForm.email}
-            onChange={handleSignUpInputChange}
+            onChange={handleSignInInputChange}
           />
           <TextField
             sx={{
@@ -308,7 +353,7 @@ export default function Auth() {
             label="password"
             name="password"
             value={signInForm.password}
-            onChange={handleSignUpInputChange}
+            onChange={handleSignInInputChange}
           />
           <Typography
             sx={{ color: "#76a85f", textAlign: "end" }}
