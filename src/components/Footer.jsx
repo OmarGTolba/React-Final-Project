@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
+    <Box sx={{ backgroundColor: '#5DAA60' ,padding:'30px', color:'white', position:'absolute',width:'100%'}}>
+      <Container maxWidth="lg" sx={{display:'flex'}}>
+        <Grid container spacing={4} sx={{height:'100%', }}>
     <Box sx={{ backgroundColor: '#5DAA60', padding: '30px', color: 'white', mt: 'auto' , position:'relative' , bottom:'-23px' }}>
       <Container maxWidth="lg" sx={{ display: 'flex' }}>
         <Grid container spacing={4} sx={{ height: '100%' }}>

@@ -4,8 +4,8 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([
-        { id: 1, name: 'Smart watch Pro max by apple ', color: 'White', size: 'L', price: 300, quantity: 1, image: '../../public/watch.jpg' },
-        { id: 2, name: 'Nike Running shoes', color: 'Black', size: 'L', price: 600, quantity: 2, image: '../../public/shoes.jpg' }
+        { id: 1, name: 'Smart watch Pro max by apple ', color: 'White', size: 'L', price: 300, quantity: 1, image: '../../public/watch.jpg',tax:'50',cod:'70' },
+        { id: 2, name: 'Nike Running shoes', color: 'Black', size: 'L', price: 600, quantity: 2, image: '../../public/shoes.jpg',tax:'50',cod:'70' }
     ]);
 
     const addToCart = (item) => {

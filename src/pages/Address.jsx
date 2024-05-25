@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
-import {
-    Box,
-    Card,
-    CardContent,
-    Typography,
-    Modal,
-    TextField,
-    Button,
-    IconButton,
-} from '@mui/material';
-import { AddCircleOutline, Close, Delete, Edit } from '@mui/icons-material';
+import { Box, Card, CardContent, Typography, Modal, Button, IconButton } from '@mui/material';
+import { AddCircleOutline, Close, Delete } from '@mui/icons-material';
 import { styled } from '@mui/system';
+import AddAddressForm from '../components/AddAddressForm';
 import EditAddressForm from '../components/EditAddressForm';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,21 +34,10 @@ const AddressCard = styled(Card)({
     justifyContent: 'space-between',
 });
 
-const ModalContent = styled(Box)({
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '400px',
-    backgroundColor: 'white',
-    padding: '20px',
-    boxShadow: 24,
-    borderRadius: '8px',
-});
-
-function Address() {
-    const navigate = useNavigate()
-    const [open, setOpen] = useState(false);
+const Address = () => {
+    const navigate = useNavigate();
+    const [openAdd, setOpenAdd] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
     const [addresses, setAddresses] = useState([
         {
             id: 1,
@@ -73,180 +54,84 @@ function Address() {
             country: 'UVW',
         },
     ]);
-    const [newAddress, setNewAddress] = useState({
-        street: '',
-        city: '',
-        zone: '',
-        country: '',
-    });
-
     const [editingAddress, setEditingAddress] = useState(null);
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleOpenAdd = () => setOpenAdd(true);
+    const handleCloseAdd = () => setOpenAdd(false);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setNewAddress((prevAddress) => ({
-            ...prevAddress,
-            [name]: value,
-        }));
+    const handleOpenEdit = (address) => {
+        setEditingAddress(address);
+        setOpenEdit(true);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Add the new address
+    const handleCloseEdit = () => setOpenEdit(false);
+
+    const handleAddAddress = (newAddress) => {
         setAddresses([...addresses, newAddress]);
-        // Reset the form fields
-        setNewAddress({
-            street: '',
-            city: '',
-            zone: '',
-            country: '',
-        });
-        handleClose();
+    };
+
+    const handleEditAddress = (editedAddress) => {
+        setAddresses(addresses.map((address) => (address.id === editedAddress.id ? editedAddress : address)));
+        setEditingAddress(null);
     };
 
     const handleDelete = (id) => {
-        // Remove the address with the given id
         setAddresses(addresses.filter((address) => address.id !== id));
-    };
-
-    const handleEdit = (address) => {
-        const editedAddress = { ...address };
-        setEditingAddress(editedAddress);
-        setOpen(true);
-    };
-    
-
-    const handleSaveEdit = () => {
-        if (editingAddress) {
-            // Update the address in the addresses array
-            setAddresses(addresses.map((address) => {
-                if (address.id === editingAddress.id) {
-                    return editingAddress;
-                }
-                return address;
-            }));
-            // Clear the editingAddress state
-            setEditingAddress(null);
-            // Close the modal
-            handleClose();
-        }
     };
 
     return (
         <Box>
-            {/* <EditAddressForm/> */}
             <Typography sx={{ marginTop: '6%', padding: '10px', textAlign: 'left' }} variant="h4" component="h1" align="center">
                 Your Addresses
             </Typography>
-            <AddressContainer sx={{ padding: '10px' , display:'flex', flexWrap:'wrap', justifyContent:'flex-start'}}>
-            <AddAddressCard><AddCircleOutline onClick={handleOpen} sx={{ color: '#66BB6A', fontSize: '80px', cursor: 'pointer' }} /></AddAddressCard>
+            <AddressContainer sx={{ padding: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+                <AddAddressCard onClick={handleOpenAdd}>
+                    <Typography sx={{ color: '#66BB6A', fontSize: '80px', cursor: 'pointer' }} >+</Typography>
+                </AddAddressCard>
                 {addresses.map((address) => (
-                    <AddressCard key={address.id} sx={{display:'flex' ,flexDirection:'column', width:'280px' , height:'280px', padding:'10px', border:'3px solid #66BB6A'}}>
-                        <CardContent sx={{lineHeight:'40px'}}>
-                            <Box sx={{display:'flex', justifyContent:'space-between'}}>
-                            <Typography sx={{color:'#66BB6A', fontWeight:'bold'}} gutterBottom variant="p" component="div">
+                    <AddressCard key={address.id} sx={{display:'flex',height:'auto'}}>
+                        <CardContent>
+                            <Typography sx={{ color: '#66BB6A', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
                                 Street
                             </Typography>
-                            <Typography sx={{color:'black', fontWeight:'bold'}} gutterBottom variant="p" component="div">
+                            <Typography sx={{ color: 'black', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
                                 {address.street}
                             </Typography>
-                            </Box>
-                            <Box sx={{display:'flex', justifyContent:'space-between'}}>
-                            <Typography sx={{color:'#66BB6A', fontWeight:'bold'}} gutterBottom variant="p" component="div">
+                            <Typography sx={{ color: '#66BB6A', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
                                 City
                             </Typography>
-                            <Typography sx={{color:'black', fontWeight:'bold'}} gutterBottom variant="p" component="div">
+                            <Typography sx={{ color: 'black', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
                                 {address.city}
                             </Typography>
-                            </Box>
-                            <Box sx={{display:'flex', justifyContent:'space-between'}}>
-                            <Typography sx={{color:'#66BB6A', fontWeight:'bold'}} gutterBottom variant="p" component="div">
+                            <Typography sx={{ color: '#66BB6A', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
                                 Zone
                             </Typography>
-                            <Typography sx={{color:'black', fontWeight:'bold'}} gutterBottom variant="p" component="div">
+                            <Typography sx={{ color: 'black', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
                                 {address.zone}
                             </Typography>
-                            </Box>
-                            <Box sx={{display:'flex', justifyContent:'space-between'}}>
-                            <Typography sx={{color:'#66BB6A', fontWeight:'bold'}} gutterBottom variant="p" component="div">
+                            <Typography sx={{ color: '#66BB6A', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
                                 Country
                             </Typography>
-                            <Typography sx={{color:'black', fontWeight:'bold'}} gutterBottom variant="p" component="div">
+                            <Typography sx={{ color: 'black', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
                                 {address.country}
                             </Typography>
-                            </Box>
-
-                        </CardContent>
                         <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                            <Button sx={{color:'#fff', backgroundColor:'#66BB6A', '&:hover':{color:'#66BB6A', backgroundColor:'#fff', border:'2px solid #66BB6A'}}} onClick={() => handleEdit(address)}>
+                            <Button onClick={() => handleOpenEdit(address)} sx={{ color: '#fff', backgroundColor: '#66BB6A', '&:hover': { color: '#66BB6A', backgroundColor: '#fff', border: '2px solid #66BB6A' } }}>
                                 Edit
                             </Button>
-                            <IconButton color="error" onClick={() => handleDelete(address.id)}>
+                            <IconButton color="black" onClick={() => handleDelete(address.id)}>
                                 <Delete />
                             </IconButton>
                         </Box>
+                        </CardContent>
                     </AddressCard>
                 ))}
             </AddressContainer>
-            <Modal open={open} onClose={handleClose}>
-                <ModalContent>
-                    <IconButton
-                        style={{ position: 'absolute', right: 10, top: 10 }}
-                        onClick={handleClose}
-                    >
-                        <Close />
-                    </IconButton>
-                    <Typography variant="h6" component="h2">
-                        {editingAddress ? 'Edit Address' : 'Add New Address'}
-                    </Typography>
-                    <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
-                        <TextField
-                            fullWidth
-                            label="Street"
-                            name="street"
-                            margin="normal"
-                            required
-                            value={editingAddress ? editingAddress.street : newAddress.street}
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            fullWidth
-                            label="City"
-                            name="city"
-                            margin="normal"
-                            required
-                            value={editingAddress ? editingAddress.city : newAddress.city}
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            fullWidth
-                            label="Zone"
-                            name="zone"
-                            margin="normal"
-                            required
-                            value={editingAddress ? editingAddress.zone : newAddress.zone}
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            fullWidth
-                            label="Country"
-                            name="country"
-                            margin="normal"
-                            required
-                            value={editingAddress ? editingAddress.country : newAddress.country}
-                            onChange={handleChange}
-                        />
-                        <Button type="submit" variant="contained" color="primary" sx={{ marginTop: '20px' }} onClick={handleSaveEdit}>
-                            {editingAddress ? 'Save Changes' : 'Add Address'}
-                        </Button>
-                    </form>
-                </ModalContent>
-            </Modal>
+            <AddAddressForm open={openAdd} handleClose={handleCloseAdd} handleSubmit={handleAddAddress} />
+            {editingAddress && <EditAddressForm open={openEdit} handleClose={handleCloseEdit} address={editingAddress} handleSaveEdit={handleEditAddress} />}
         </Box>
     );
-}
+};
 
 export default Address;
+

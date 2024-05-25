@@ -18,7 +18,15 @@ const token = localStorage.getItem('token')
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState({});
   
-    const handleOpen = () => {
+    const [userData, setUserData] = useState({
+        name: '',
+        email: '',
+        gender:'male'
+    });
+
+const [user,setUser] = useState({})    
+
+const handleOpen = () => {
         setOpen(true);
     };
 
