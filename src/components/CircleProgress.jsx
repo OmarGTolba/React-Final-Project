@@ -14,19 +14,40 @@ function CircularProgressWithLabel(props) {
                 display: "inline-flex",
                 justifyContent: "center",
                 alignItems: "center",
-                width:'100%'
+                width: '100%',
+                borderRadius: '50%'
             }}
         >
             <CircularProgress
                 variant="determinate"
-                value={props.value}
-                style={{ width: "400px", height: "400px" ,
-                '& circle[stroke-width]': { // Target the circle element with a stroke-width attribute
-                  strokeWidth: '2px' // Adjust the strokeWidth as needed
-                }}}
+                value={100}
+                style={{
+                    width: "400px", height: "400px",
+                    '& circle[stroke-width]': { // Target the circle element with a stroke-width attribute
+                        strokeWidth: '2px' // Adjust the strokeWidth as needed
+                    },
+                    color: '#98D19B', // Set color to black with reduced opacity
+                    position: 'absolute', // Position it absolutely
+                }}
                 thickness={2}
-                strokeLinecap={'rounded'}
+                strokeLinecap={'round'}
             />
+            <CircularProgress
+                sx={{ strokeDashoffset: '100%' }}
+                variant="determinate"
+                value={props.value}
+                style={{
+                    width: "400px", height: "400px",
+                    '& circle[stroke-width]': { // Target the circle element with a stroke-width attribute
+                        strokeWidth: '2px' // Adjust the strokeWidth as needed
+                    },
+                    color: '#5DAA60', // Set color to green
+                    borderRadius: '50%',
+                    strokeLinecap: 'rounded'
+                }}
+                thickness={2}
+            />
+
             <Box
                 sx={{
                     top: 30,
@@ -40,26 +61,30 @@ function CircularProgressWithLabel(props) {
                     justifyContent: "center"
                 }}
             >
-                <Typography variant="subtitle1" sx={{ marginBottom: "15px" }}>
-                    Highest Bidder: {props.bidderName}
+                <Typography variant="subtitle1" sx={{ marginBottom: "15px", fontWeight: '700', fontSize: '28px' }}>
+                    {props.bidderName}
                 </Typography>
-                <Typography variant="subtitle1" sx={{ marginBottom: "15px" }}>
-                    Highest Bid: {props.highestBid}$
+                <Typography variant="subtitle1" sx={{ marginBottom: "15px", fontWeight: '700', fontSize: '28px', backgroundColor: '#5DAA60', borderRadius: '10px', padding: '0px 17px', color: '#fff' }}>
+                    {props.highestBid}$
                 </Typography>
-                <Typography variant="subtitle1" sx={{ marginBottom: "15px" }}>
+                <Typography variant="subtitle1" sx={{ marginBottom: "15px", fontWeight: '700', fontSize: '28px' }}>
+                    Highest Bidder
+                </Typography>
+                <Typography variant="subtitle1" sx={{ marginBottom: "15px", fontSize: '13px', fontWeight: 'bold' }}>
                     Time left
                 </Typography>
                 <Typography
                     sx={{
-                        fontSize: "30px",
-                        padding: "0px 60px",
+                        fontSize: "25px",
+                        padding: "0px 50px",
                         margin: "0",
-                        borderRadius: "10px",
-                        marginBottom: "15px"
+                        borderRadius: "5px",
+                        marginBottom: "15px",
+                        backgroundColor: '#92E3A9',
+                        fontWeight: 'bold',
                     }}
                     variant="caption"
                     component="div"
-                    color="text.secondary"
                 >
                     {`${props.hours}:${props.minutes}:${props.seconds}`}
                 </Typography>
@@ -79,7 +104,7 @@ CircularProgressWithLabel.propTypes = {
 
 export default function AuctionCard() {
     const [progress, setProgress] = useState({
-        hours: 6,
+        hours: 3,
         minutes: 0,
         seconds: 10
     });
@@ -142,22 +167,46 @@ export default function AuctionCard() {
                 minutes={progress.minutes}
                 seconds={progress.seconds}
             />
-            <Box sx={{display:"flex",flexDirection:'column', alignItems:'center'}}>
-            <TextField
-                label="Place Bid"
-                variant="outlined"
-                value={bidAmount}
-                onChange={(e) => setBidAmount(e.target.value)}
-            />
-            <Box display="flex" alignItems="center" mt={2} >
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={confirmBid ? confirmBidHandler : handleOneBid}
+            <Box sx={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
+                <TextField
+                    //   id="cvv"
+                    label="Place Bid"
+                    variant="outlined"
+                    InputLabelProps={{ style: { color: '#5DAA60' } }}
+                    value={bidAmount}
+                    onChange={(e) => setBidAmount(e.target.value)}
+                    sx={{
+                        "& .MuiOutlinedInput-root": {
+                            fontWeight: 'bold',
+                            color: 'black',
+                            // zIndex:'5555555555555',
+                            borderColor: '#5DAA60',
+                            '&:hover fieldset': {
+                                borderColor: '#5DAA60',
+                            },
+                            '& fieldset': {
+                                borderColor: '#5DAA60',
+                                backgroundColor: '',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: '#5DAA60',
+                            },
+                        },
+                        width: '70%',
+                    }}
+                />
+                <Box display="flex" alignItems="center" mt={2}
+                    sx={{ width: '70%', justifyContent: 'center' }}
                 >
-                    {confirmBid ? "Confirm" : "Place Bid"}
-                </Button>
-            </Box>
+                    <Button
+                        sx={{ width: '70%', backgroundColor: '#5DAA60','&:hover':{backgroundColor:'#3abf3a'} }}
+                        variant="contained"
+                        color="primary"
+                        onClick={confirmBid ? confirmBidHandler : handleOneBid}
+                    >
+                        {confirmBid ? "Confirm" : "Place Bid"}
+                    </Button>
+                </Box>
             </Box>
         </Box>
     );

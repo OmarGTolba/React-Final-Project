@@ -1,83 +1,52 @@
 import React, { useState } from 'react';
-import { Container, Typography, Box, Button, Card, CardContent, CardActions } from '@mui/material';
-import { Link, Route,} from 'react-router-dom';
-// import AddAddressForm from './AddAddressForm';
-import EditAddressForm from './EditAddressForm';
+import { Modal, TextField, Button, IconButton, Typography, Box } from '@mui/material';
+import { Close } from '@mui/icons-material';
 
-function AddAddressForm() {
-    const [addresses, setAddresses] = useState([
-        {
-            name: 'Mohamed Ayman Mostafa',
-            street: 'Shbeen street',
-            city: 'Jasmine Tower',
-            zone: 'Ismailia Free zone',
-            country: 'Egypt'
-        }
-    ]);
+const AddAddressForm = ({ open, handleClose, handleSubmit }) => {
+    const [newAddress, setNewAddress] = useState({
+        id: '',
+        street: '',
+        city: '',
+        zone: '',
+        country: '',
+    });
 
-    // const history = useHistory();
-
-    const addAddress = (newAddress) => {
-        setAddresses([...addresses, newAddress]);
-        // history.push('/address');
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNewAddress((prevAddress) => ({
+            ...prevAddress,
+            [name]: value,
+        }));
     };
 
-    const editAddress = (index, editedAddress) => {
-        const updatedAddresses = [...addresses];
-        updatedAddresses[index] = editedAddress;
-        setAddresses(updatedAddresses);
-        // history.push('/address');
-    };
-
-    const deleteAddress = (index) => {
-        const updatedAddresses = addresses.filter((address, i) => i !== index);
-        setAddresses(updatedAddresses);
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        handleSubmit(newAddress);
+        handleClose();
     };
 
     return (
-        <Container sx={{ width: '100%', marginTop: "10%" }}>
-            <Typography sx={{ padding: '10px' }} variant="h5" gutterBottom>
-                Your Addresses
-            </Typography>
-            <Box sx={{ display: 'flex', p: 3, gap: '20px', padding: '10px' }}>
-                {/* <Link to="/address/add"> */}
-                    <Button variant="outlined">Add Address</Button>
-                {/* </Link> */}
-                {/* <Switch> */}
-                    {/* <Route path="/address/add"> */}
-                        <AddAddressForm  />
-                    {/* </Route> */}
-                    {/* <Route path="/address/edit/:index"> */}
-                        {/* <EditAddressForm addresses={addresses}  /> */}
-                    {/* </Route> */}
-                {/* </Switch> */}
-                {addresses.map((address, index) => (
-                    <Card key={index} sx={{ maxWidth: 345 }}>
-                        <CardContent>
-                            <Typography gutterBottom variant="h6" component="div">
-                                {address.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {address.street}
-                                <br />
-                                {address.city}
-                                <br />
-                                {address.zone}
-                                <br />
-                                {address.country}
-                            </Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Link to={`/address/edit/${index}`}>
-                                <Button size="small">Edit</Button>
-                            </Link>
-                            <Button size="small" color="error" onClick={() => deleteAddress(index)}>Remove</Button>
-                        </CardActions>
-                    </Card>
-                ))}
+        <Modal open={open} onClose={handleClose}>
+            <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '400px', backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
+                <IconButton style={{ position: 'absolute', right: 10, top: 10 }} onClick={handleClose}>
+                    <Close />
+                </IconButton>
+                <Typography variant="h6" component="h2">
+                    Add New Address
+                </Typography>
+                <form onSubmit={handleFormSubmit} style={{ marginTop: '20px' }}>
+                    <TextField fullWidth label="ID" name="id" margin="normal" required value={newAddress.id} onChange={handleChange} />
+                    <TextField fullWidth label="Street" name="street" margin="normal" required value={newAddress.street} onChange={handleChange} />
+                    <TextField fullWidth label="City" name="city" margin="normal" required value={newAddress.city} onChange={handleChange} />
+                    <TextField fullWidth label="Zone" name="zone" margin="normal" required value={newAddress.zone} onChange={handleChange} />
+                    <TextField fullWidth label="Country" name="country" margin="normal" required value={newAddress.country} onChange={handleChange} />
+                    <Button type="submit" variant="contained" color="primary" sx={{ marginTop: '20px' }}>
+                        Add Address
+                    </Button>
+                </form>
             </Box>
-        </Container>
+        </Modal>
     );
-}
+};
 
 export default AddAddressForm;
