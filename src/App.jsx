@@ -8,7 +8,6 @@ import CardHeader from './components/CardHeader.jsx';
 import { Box, Container, CssBaseline } from '@mui/material';
 import Hero from './Hero.jsx/Hero.jsx';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AllProducts from './pages/AddProduct/AllProducts.jsx';
 import Home from './pages/Home.jsx';
@@ -21,6 +20,7 @@ import BidPage from './pages/BidPage.jsx';
 import Footer from './components/Footer.jsx';
 import AddAddressForm from './components/AddAddressForm.jsx';
 import OrderDone from './pages/OrderDone.jsx';
+import ProductDetails from './pages/ProductDetails.jsx'
 
 
 
@@ -60,13 +60,14 @@ const toggleDarkMode = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/products" element={<AllProducts />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/product-details" element={<ProductDetails/>} />
           </Routes>
           <Footer/>
         </ThemeProvider>
         </Router>
 
-     {/* Your other components */}
     </div>
   );
 }

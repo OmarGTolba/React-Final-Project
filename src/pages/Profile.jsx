@@ -7,12 +7,13 @@ import Address from './Address';
 import Orders from './Orders';
 import Payment from './Payment';
 import { Box, Container, Stack } from '@mui/material';
+import { useEffect } from 'react';
 
 
 const drawerWidth = 300;
 
 export default function Profile() {
-
+const token = localStorage.getItem('token')
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState({
@@ -21,6 +22,7 @@ export default function Profile() {
         gender:'male'
     });
 
+const [user,setUser] = useState({})    
     const handleOpen = () => {
         setOpen(true);
     };
@@ -48,6 +50,33 @@ export default function Profile() {
     const handleListItemClick = (index) => {
         setSelectedIndex(index);
     };
+
+
+
+    useEffect(() => {
+        fetchUser()
+    }, []);
+
+
+
+    const fetchUser = async () => {
+        try {
+          const response = await fetch('http://localhost:3000/api/v1/auth/get-user', {
+            headers: {
+              'jwt': token
+          }})
+    
+                  if (!response.ok) {
+            throw new Error('Failed to fetch categories');
+          }
+          const data = await response.json();
+        
+          setUser(data.result)
+          console.log(data.result);
+        } catch (error) {
+          console.error('Error fetching categories:', error);
+        }
+      };
 
 
     return (
