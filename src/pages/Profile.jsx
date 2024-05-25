@@ -13,20 +13,15 @@ import { useEffect } from 'react';
 const drawerWidth = 300;
 
 export default function Profile() {
-const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token')
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState({});
-  
-    const [userData, setUserData] = useState({
-        name: '',
-        email: '',
-        gender:'male'
-    });
 
-const [user,setUser] = useState({})    
 
-const handleOpen = () => {
+    const [user, setUser] = useState({})
+
+    const handleOpen = () => {
         setOpen(true);
     };
 
@@ -64,22 +59,23 @@ const handleOpen = () => {
 
     const fetchUser = async () => {
         try {
-          const response = await fetch('http://localhost:3000/api/v1/auth/get-user', {
-            headers: {
-              'jwt': token
-          }})
-    
-                  if (!response.ok) {
-            throw new Error('Failed to fetch categories');
-          }
-          const data = await response.json();
-        
-          setUserData(data.result)
-          console.log(data.result);
+            const response = await fetch('http://localhost:3000/api/v1/auth/get-user', {
+                headers: {
+                    'jwt': token
+                }
+            })
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch categories');
+            }
+            const data = await response.json();
+
+            setUserData(data.result)
+            console.log(data.result);
         } catch (error) {
-          console.error('Error fetching categories:', error);
+            console.error('Error fetching categories:', error);
         }
-      };
+    };
 
 
     return (
@@ -89,7 +85,7 @@ const handleOpen = () => {
             <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} />
             {
                 selectedIndex === 0 && (
-                    <div style={{width:'100%'}}>
+                    <div style={{ width: '100%' }}>
                         {/* <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} /> */}
                         <ProfileInfo
                             handleOpen={handleOpen}
@@ -108,7 +104,7 @@ const handleOpen = () => {
             {/* Order-Section */}
             {
                 selectedIndex === 1 && (
-                    <div style={{width:'100%'}}>
+                    <div style={{ width: '100%' }}>
                         {/* <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} /> */}
                         <Orders />
                     </div>
@@ -118,7 +114,7 @@ const handleOpen = () => {
 
             {
                 selectedIndex === 2 && (
-                    <Box sx={{width:'100%' }}>
+                    <Box sx={{ width: '100%' }}>
                         {/* <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} /> */}
                         <Address />
                     </Box>
@@ -127,7 +123,7 @@ const handleOpen = () => {
             {/* Payment-Section */}
             {
                 selectedIndex === 3 && (
-                    <Box sx={{ marginLeft:'2%', width:'50%'}}>
+                    <Box sx={{ marginLeft: '2%', width: '50%' }}>
                         {/* <Sidebar drawerWidth={drawerWidth} handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} /> */}
                         <Payment />
                     </Box>
