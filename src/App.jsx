@@ -29,7 +29,7 @@ function App() {
 
   const [darkMode, setDarkMode] = useState(false);
 
-
+const hambozo =''
   const theme = createTheme({
     palette: {
         mode: darkMode ? 'dark' : 'light',
@@ -67,8 +67,7 @@ const toggleDarkMode = () => {
           <Footer/>
         </ThemeProvider>
         </Router>
-{/* hello from main
- */}
+
     </div>
   );
 }
