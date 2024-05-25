@@ -20,6 +20,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import BidPage from './pages/BidPage.jsx';
 import Footer from './components/Footer.jsx';
 import AddAddressForm from './components/AddAddressForm.jsx';
+import OrderDone from './pages/OrderDone.jsx';
 
 
 
@@ -47,19 +48,18 @@ const toggleDarkMode = () => {
       <CssBaseline/>
 
         <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>
-        {/* <AddAddressForm/> */}
           <Routes>
             <Route path="/profile" element={<Profile />} >
             </Route>
               {/* <Route path="addAddress" element={<AddAddressForm/>} /> */}
             <Route path="/bid" element={<BidPage />} />
+            <Route path="/orderDone" element={<OrderDone />} />
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/placeOrder" element={<PlaceOrder />} />
             <Route path="/login" element={<Login />} />
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/products" element={<AllProducts />} />
-            {/* <Route path="/home" element={<Home />} /> */}
             <Route path="/about" element={<AboutUs />} />
           </Routes>
           <Footer/>

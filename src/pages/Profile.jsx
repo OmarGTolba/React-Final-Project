@@ -17,7 +17,8 @@ export default function Profile() {
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState({
         name: '',
-        email: ''
+        email: '',
+        gender:'male'
     });
 
     const handleOpen = () => {
