@@ -29,7 +29,7 @@ function App() {
 
   const [darkMode, setDarkMode] = useState(false);
 
-const hambozo =''
+const hamada =''
   const theme = createTheme({
     palette: {
         mode: darkMode ? 'dark' : 'light',
