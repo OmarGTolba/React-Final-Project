@@ -27,6 +27,13 @@ function ProfileInfo({
   open,
   selectedIndex,
 }) {
+
+
+
+
+    function handleSubmit(){
+        console.log(userData);
+    }
   return (
     <>
       {/* Profile-Section */}
@@ -109,6 +116,7 @@ function ProfileInfo({
                           readOnly
                           id="email"
                           label="email"
+                          onChange={handleChange}
                           value={userData.email}
                           variant="outlined"
                           InputLabelProps={{ style: { color: "#5daa60" } }}
@@ -141,6 +149,7 @@ function ProfileInfo({
                           label={userData.firstName}
                           placeholder={userData.firstName}
                           variant="outlined"
+                          onChange={handleChange}
                           InputLabelProps={{ style: { color: "#5daa60" } }}
                           sx={{
                             "& .MuiOutlinedInput-root": {
@@ -170,6 +179,7 @@ function ProfileInfo({
                           id="lastName"
                           label={userData.lastName}
                           placeholder={userData.lastName}
+                          onChange={handleChange}
                           variant="outlined"
                           InputLabelProps={{ style: { color: "#5daa60" } }}
                           sx={{
@@ -210,6 +220,7 @@ function ProfileInfo({
                           id="phoneNumber"
                           label="Phone Number"
                           placeholder="+201066035716"
+                          onChange={handleChange}
                           variant="outlined"
                           InputLabelProps={{ style: { color: "#5daa60" } }}
                           sx={{
@@ -237,8 +248,8 @@ function ProfileInfo({
                       </Grid>
                       <Grid item xs={4} sm={4}>
                         <TextField
-                          id="birthday"
-                          label="Birthday"
+                          id={userData.birthDay}
+                          label={userData.birthDay}
                           placeholder="06|22|1997"
                           variant="outlined"
                           InputLabelProps={{ style: { color: "#5daa60" } }}
