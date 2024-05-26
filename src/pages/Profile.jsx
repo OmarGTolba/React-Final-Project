@@ -17,8 +17,6 @@ export default function Profile() {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState({});
-
-
     const [user, setUser] = useState({})
 
     const handleOpen = () => {
@@ -36,12 +34,31 @@ export default function Profile() {
         }));
     };
 
-    const handleConfirm = (event) => {
+    const handleConfirm = async (event) => {
         const { name, value } = event.target;
         console.log('Confirmed:', userData);
         setUserData((prevData) => ({
             ...prevData, [name]: value
         }));
+        try {
+            const response = await fetch('http://localhost:3000/api/v1/auth/edit-user', {
+              method: 'PUT',  
+              headers: {
+                'Content-Type': 'application/json',
+                'jwt': token
+              },
+              body: JSON.stringify(userData)  
+            });
+        
+            if (!response.ok) {
+              throw new Error('Failed to update user');
+            }
+            const data = await response.json();
+            setUserData(data.result);
+            console.log('User updated:', data.result);
+          } catch (error) {
+            console.error('Error updating user:', error);
+          }
         handleClose();
     };
 
