@@ -64,7 +64,7 @@ const toggleDarkMode = () => {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/product-details" element={<ProductDetails/>} />
           </Routes>
-          <Footer/>
+          {/* <Footer/> */}
         </ThemeProvider>
         </Router>
 

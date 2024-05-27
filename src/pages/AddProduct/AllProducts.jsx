@@ -4,6 +4,7 @@ import { Box, Container, FormControlLabel, RadioGroup , FormControl , FormLabel 
 import { Button } from 'bootstrap'
 import ProductsContext from '../../contexts/ProductsContext'
 import CategoryContext from '../../contexts/CategoriesContext'
+import axios from 'axios'
 
 export default function AllProducts() {
     const {products} = useContext(ProductsContext)
@@ -91,7 +92,32 @@ console.log(dp);
 setDisplayedProducts(dp)
   console.log(event.target.value);}
   setCurrentPage(1);
+
+
+
+  
+}async function addToCart(productId) {
+  console.log(productId);
+  const productForm = new FormData();
+  console.log(localStorage.getItem('token'));
+  productForm.append("productId", productId);
+  
+  try {
+    const token =  localStorage.getItem('token')
+      const resp = await axios.post('http://localhost:3000/api/v1/auth/add-to-cart', productForm, {
+          headers: {
+            'Content-Type': 'application/json',
+              'jwt': token
+          }
+      });
+      console.log(resp);
+      // alert('Product added successfully');
+  } catch (err) {
+      console.error(err);
+      alert('Failed to add product');
+  }
 }
+
 
 
     return (
@@ -144,7 +170,7 @@ setDisplayedProducts(dp)
 {/* <ProductCard></ProductCard> */}
 {/* <ProductCard title='sdas' price='10'></ProductCard> */}
 {currentProducts?.map((product)=>(
-<ProductCard title={product?.title} price={product?.price}  category={product?.categoryId?.title}  location={product?.location}></ProductCard>
+<ProductCard title={product?.title} price={product?.price}  category={product?.categoryId?.title}  location={product?.location}   addToCart={()=>{addToCart(product._id)}} productId={product._id}></ProductCard>
 
 ))}
         </Box>
