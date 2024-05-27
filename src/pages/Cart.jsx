@@ -22,16 +22,15 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
-import { CartContext } from '../contexts/CartContext';
+import { CartContext, CartProvider } from '../contexts/CartContext';
 
 const Cart = () => {
 
     const { cartItems, updateCartItemQuantity, setCartItems, totalItems } = useContext(CartContext);
 
-
     useEffect(() => {
-        // console.log(token);
-    }, []);
+        console.log(cartItems);
+    }, [cartItems]);
 
     const safeTotalItems = isNaN(totalItems) ? 0 : totalItems;
 
@@ -63,7 +62,7 @@ const Cart = () => {
 
     const navigate = useNavigate();
     // const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-    const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const totalPrice = 0
 
     return (
         <div>
@@ -105,7 +104,7 @@ const Cart = () => {
                             </Grid>
                         </Grid>
                     </Paper>
-                    {cartItems.map(item => (
+                    {cartItems?.map(item => (
                         <Paper key={item.id} sx={{ p: 2, mt: 2 }}>
                             <Grid container spacing={2} alignItems="center">
                                 <Grid item xs={12} md={1}>

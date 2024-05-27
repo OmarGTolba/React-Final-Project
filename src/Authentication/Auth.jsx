@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useContext, useState } from "react";
 import "./Auth.css";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import UserContext from "../contexts/UserContext";
 import axios from "axios";
 export default function Auth() {
@@ -154,168 +154,199 @@ export default function Auth() {
       ></Box>
 
       {/* registeration Box */}
-      <Box
-        className={`inputs  ${moveToRegister ? "d-block" : "d-none"} ${
-          fade ? "fade-out" : "fade-in"
-        }`}
+      <Grid
+  container
+  className={`inputs  ${moveToRegister ? "d-block" : "d-none"} ${
+    fade ? "fade-out" : "fade-in"
+  }`}
+  justifyContent="center"
+  alignItems="center"
+  sx={{ width: "75%", margin: "auto" }}
+>
+  <Typography variant="h5" margin={1}>
+    Vibe Verse
+  </Typography>
+  <Typography variant="h5" margin={1}>
+    Create your account
+  </Typography>
+  
+  
+  
+  <Grid display={'flex'} sx={{display:'flex' , flexWrap:'wrap',justifyContent:'space-between'}} xs={12 } md={12}>
+
+
+  
+  <Grid item xs={12} md={5} margin={1}>
+    <TextField
+      sx={{
+        width: "100%",
+        marginBottom: "16px",
+        backgroundColor: "rgba(0, 255, 0, 0.1)",
+        "& .MuiInput-underline:after": {
+          borderBottomColor: "rgb(150, 187, 124)",
+          color: "rgb(150, 187, 124)",
+        },
+        "& .MuiOutlinedInput-root": {
+          "&.Mui-focused fieldset": {
+            borderColor: "rgb(150, 187, 124)",
+          },
+        },
+      }}
+      InputLabelProps={{ style: { color: "#79987a" } }}
+      label="First Name"
+      name="firstName"
+      value={signUpForm.firstName}
+      onChange={handleSignUpInputChange}
+    />
+  </Grid>
+  <Grid item xs={12} md={5} margin={1}>
+    <TextField
+      sx={{
+        width: "100%",
+        marginBottom: "16px",
+        backgroundColor: "rgba(0, 255, 0, 0.1)",
+        "& .MuiInput-underline:after": {
+          borderBottomColor: "rgb(150, 187, 124)",
+          color: "rgb(150, 187, 124)",
+        },
+        "& .MuiOutlinedInput-root": {
+          "&.Mui-focused fieldset": {
+            borderColor: "rgb(150, 187, 124)",
+          },
+        },
+      }}
+      InputLabelProps={{ style: { color: "#79987a" } }}
+      label="Last Name"
+      name="lastName"
+      value={signUpForm.lastName}
+      onChange={handleSignUpInputChange}
+    />
+  </Grid>
+  </Grid>
+
+
+  <Grid item xs={12} margin={1}>
+    <TextField
+      sx={{
+        width: "100%",
+        marginBottom: "16px",
+        backgroundColor: "rgba(0, 255, 0, 0.1)",
+        "& .MuiInput-underline:after": {
+          borderBottomColor: "rgb(150, 187, 124)",
+          color: "rgb(150, 187, 124)",
+        },
+        "& .MuiOutlinedInput-root": {
+          "&.Mui-focused fieldset": {
+            borderColor: "rgb(150, 187, 124)",
+          },
+        },
+      }}
+      InputLabelProps={{ style: { color: "#79987a" } }}
+      label="Email"
+      name="email"
+      value={signUpForm.email}
+      onChange={handleSignUpInputChange}
+    />
+  </Grid>
+  <Grid item xs={12} margin={1}>
+    <TextField
+      sx={{
+        width: "100%",
+        marginBottom: "16px",
+        backgroundColor: "rgba(0, 255, 0, 0.1)",
+      }}
+      label="Phone Number"
+      name="phoneNumber"
+      value={signUpForm.phoneNumber}
+      onChange={handleSignUpInputChange}
+    />
+  </Grid>
+  <Grid item xs={12} margin={1}>
+    <TextField
+      sx={{
+        width: "100%",
+        marginBottom: "16px",
+        backgroundColor: "rgba(0, 255, 0, 0.1)",
+      }}
+      label="Password"
+      name="password"
+      type="password"
+      value={signUpForm.password}
+      onChange={handleSignUpInputChange}
+    />
+  </Grid>
+  <Grid item xs={12} margin={1}>
+    <TextField
+      sx={{
+        width: "100%",
+        marginBottom: "16px",
+        backgroundColor: "rgba(0, 255, 0, 0.1)",
+      }}
+      label="Confirm Password"
+      name="confirmPassword"
+      type="password"
+      value={signUpForm.confirmPassword}
+      onChange={handleSignUpInputChange}
+    />
+  </Grid>
+  <Grid item xs={12} margin={1}>
+    <TextField
+      sx={{
+        width: "100%",
+        marginBottom: "16px",
+        backgroundColor: "rgba(0, 255, 0, 0.1)",
+      }}
+      label="Birthday"
+      name="birthDay"
+      type="date"
+      value={signUpForm.birthDay}
+      onChange={handleSignUpInputChange}
+      InputLabelProps={{
+        shrink: true,
+        style: { color: "#79987a" },
+      }}
+    />
+  </Grid>
+  <Grid item xs={12} margin={1}>
+    <Button
+      variant="contained"
+      sx={{
+        backgroundColor: "#76a85f",
+        "&:hover": {
+          backgroundColor: "#fff",
+          color: "#76a85f",
+          outline: "2px solid #76a85f",
+        },
+      }}
+      onClick={handleSignUp}
+    >
+      Register
+    </Button>
+  </Grid>
+  <Grid item xs={12} margin={2}>
+    <Typography
+      sx={{ display: "flex", justifyContent: "center" }}
+      margin={2}
+    >
+      {" "}
+      Have an account?{" "}
+      <Typography
+        marginX={1}
         sx={{
-          justifyContent: "center",
-          display: "flex",
-          alignItems: "center",
-          width: "75%",
-          margin: "auto",
+          color: "#76a85f",
+          "&:hover": { cursor: "pointer", textDecoration: "underline" },
         }}
+        onClick={handleToLogin}
       >
-        <Typography variant="h5" margin={1}>
-          Vibe Verse
-        </Typography>
-        <Typography variant="h5" margin={1}>
-          creaate your account
-        </Typography>
-        <Box margin={3}>
-        
-        <TextField
-            sx={{
-              width: "50%",
-              marginBottom: "16px",
-              backgroundColor: "rgba(0, 255, 0, 0.1)",
-              "& .MuiInput-underline:after": {
-                borderBottomColor: "rgb(150, 187, 124)",
-                color: "rgb(150, 187, 124)",
-              },
-              "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": {
-                  borderColor: "rgb(150, 187, 124)",
-                },
-              },
-            }}
-            InputLabelProps={{ style: { color: "#79987a" } }}
-            label="firstName"
-            name="firstName"
-            value={signUpForm.firstName}
-            onChange={handleSignUpInputChange}
-          />
-            <TextField
-            sx={{
-              width: "50%",
-              marginBottom: "16px",
-              backgroundColor: "rgba(0, 255, 0, 0.1)",
-              "& .MuiInput-underline:after": {
-                borderBottomColor: "rgb(150, 187, 124)",
-                color: "rgb(150, 187, 124)",
-              },
-              "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": {
-                  borderColor: "rgb(150, 187, 124)",
-                },
-              },
-            }}
-            InputLabelProps={{ style: { color: "#79987a" } }}
-            label="lastName"
-            name="lastName"
-            value={signUpForm.lastName}
-            onChange={handleSignUpInputChange}
-          />
-        
-          <TextField
-            sx={{
-              width: "100%",
-              marginBottom: "16px",
-              backgroundColor: "rgba(0, 255, 0, 0.1)",
-              "& .MuiInput-underline:after": {
-                borderBottomColor: "rgb(150, 187, 124)",
-                color: "rgb(150, 187, 124)",
-              },
-              "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": {
-                  borderColor: "rgb(150, 187, 124)",
-                },
-              },
-            }}
-            InputLabelProps={{ style: { color: "#79987a" } }}
-            label="email"
-            name="email"
-            value={signUpForm.email}
-            onChange={handleSignUpInputChange}
-          />
-          <TextField
-            sx={{
-              width: "100%",
-              marginBottom: "16px",
-              backgroundColor: "rgba(0, 255, 0, 0.1)",
-            }}
-            label="phoneNumber"
-            name="phoneNumber"
-            value={signUpForm.phoneNumber}
-            onChange={handleSignUpInputChange}
-          />
-          <TextField
-            sx={{
-              width: "100%",
-              marginBottom: "16px",
-              backgroundColor: "rgba(0, 255, 0, 0.1)",
-            }}
-            label="password"
-            name="password"
-            value={signUpForm.password}
-            onChange={handleSignUpInputChange}
-          />
-          <TextField
-            sx={{
-              width: "100%",
-              marginBottom: "16px",
-              backgroundColor: "rgba(0, 255, 0, 0.1)",
-            }}
-            label="confirmPassword"
-            name="confirmPassword"
-            value={signUpForm.confirmPassword}
-            onChange={handleSignUpInputChange}
-          />
-          <TextField
-            sx={{
-              width: "100%",
-              marginBottom: "16px",
-              backgroundColor: "rgba(0, 255, 0, 0.1)",
-            }}
-            label="birthDay"
-            name="birthDay"
-            value={signUpForm.birthDay}
-            onChange={handleSignUpInputChange}
-          />
-        </Box>
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#76a85f",
-            "&:hover": {
-              backgroundColor: "#fff",
-              color: "#76a85f",
-              outline: "2px solid #76a85f",
-            },
-          }}
-          onClick={handleSignUp}
-        >
-          Register
-        </Button>
-        <Typography
-          sx={{ display: "flex", justifyContent: "center" }}
-          margin={2}
-        >
-          {" "}
-          have an account?{" "}
-          <Typography
-            marginX={1}
-            sx={{
-              color: "#76a85f",
-              "&:hover": { cursor: "pointer", textDecoration: "underline" },
-            }}
-            onClick={handleToLogin}
-          >
-            Login{" "}
-          </Typography>{" "}
-        </Typography>
-        <img src="bro.png" className="regImg" alt="" />
-      </Box>
+        Login{" "}
+      </Typography>{" "}
+    </Typography>
+  </Grid>
+  <Grid item xs={12} md={6} margin={1}>
+    <img src="bro.png" className="regImg" alt="" />
+  </Grid>
+</Grid>
+
 
       {/* Login Box */}
       <Box
@@ -332,7 +363,7 @@ export default function Auth() {
       >
         <Typography variant="h5">Vibe Verse</Typography>
         <Typography variant="h5">Welcome Back!</Typography>
-        <Box margin={3}>
+        <Box margin={1}>
           <TextField
             sx={{
               width: "100%",
@@ -416,7 +447,7 @@ export default function Auth() {
         <Typography variant="h5" margin={1}>
           Forget Password?
         </Typography>
-        <Box margin={3}>
+        <Box margin={1}>
           <TextField
             sx={{
               width: "100%",
@@ -475,7 +506,7 @@ export default function Auth() {
         <Typography variant="h5" margin={1}>
           Reset Password
         </Typography>
-        <Box margin={3}>
+        <Box margin={1}>
           <TextField
             sx={{
               width: "100%",
@@ -534,7 +565,7 @@ export default function Auth() {
         <Typography variant="h5" margin={1}>
           Reset Password
         </Typography>
-        <Box margin={3}>
+        <Box margin={1}>
           <TextField
             sx={{
               width: "100%",
