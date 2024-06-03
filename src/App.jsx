@@ -63,6 +63,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/product-details" element={<ProductDetails/>} />
           </Routes>
+          {!isAuthRoute && <Footer toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}
           {/* <Footer/> */}
         </ThemeProvider>
      
