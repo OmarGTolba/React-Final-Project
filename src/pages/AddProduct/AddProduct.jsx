@@ -60,7 +60,7 @@ export default function AddProduct() {
                     'jwt': localStorage.getItem('token')
                 }
             });
-            alert('Product added successfully');
+        //    alert('Product added successfully');
             // Reset form after successful submission
             setFormData({
                 title: '',
@@ -75,7 +75,7 @@ export default function AddProduct() {
             });
         } catch (err) {
             console.error(err);
-            alert('Failed to add product');
+       //     alert('Failed to add product');
         }
     };
 

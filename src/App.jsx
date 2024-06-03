@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Login from './Authentication/Auth.jsx'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './NavBar/Navbar.jsx';
@@ -20,38 +21,36 @@ import BidPage from './pages/BidPage.jsx';
 import Footer from './components/Footer.jsx';
 import AddAddressForm from './components/AddAddressForm.jsx';
 import OrderDone from './pages/OrderDone.jsx';
-import ProductDetails from './pages/ProductDetails.jsx'
-
-
+import ProductDetails from './pages/ProductDetails.jsx';
 
 
 function App() {
-
+  const location = useLocation();
   const [darkMode, setDarkMode] = useState(false);
+  const [isAuthRoute, setIsAuthRoute] = useState(false);
 
-const hamada =''
+  useEffect(() => {
+    setIsAuthRoute(location.pathname === '/login');
+  }, [location.pathname]);
+
   const theme = createTheme({
     palette: {
         mode: darkMode ? 'dark' : 'light',
     },
-});
+  });
 
-const toggleDarkMode = () => {
+  const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-};
+  };
+
   return (
     <div className="App">  
-        
-    
-    <Router>
-    <ThemeProvider theme={theme}>
-      <CssBaseline/>
-
-        <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>
+        <ThemeProvider theme={theme}>
+          <CssBaseline/>
+          {!isAuthRoute && <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}
           <Routes>
-            <Route path="/profile" element={<Profile />} >
-            </Route>
-              {/* <Route path="addAddress" element={<AddAddressForm/>} /> */}
+            <Route path="/profile" element={<Profile />} />
+            {/* <Route path="addAddress" element={<AddAddressForm/>} /> */}
             <Route path="/bid" element={<BidPage />} />
             <Route path="/orderDone" element={<OrderDone />} />
             <Route path="/" element={<Home />} />
@@ -66,8 +65,7 @@ const toggleDarkMode = () => {
           </Routes>
           {/* <Footer/> */}
         </ThemeProvider>
-        </Router>
-
+     
     </div>
   );
 }

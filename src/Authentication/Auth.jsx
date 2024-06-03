@@ -4,7 +4,10 @@ import "./Auth.css";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import UserContext from "../contexts/UserContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 export default function Auth() {
+  const navigate =useNavigate()
   const handleSignUp = async () => {
     console.log(signUpForm);
     try {
@@ -21,6 +24,7 @@ export default function Auth() {
   const { setToken } = useContext(UserContext);
   const handleSignIn = async () => {
     console.log(signInForm);
+  
     try {
       const response = await axios.post(
         "http://localhost:3000/api/v1/auth/login",
@@ -29,6 +33,7 @@ export default function Auth() {
       console.log(response.data.user.token);
       setToken(response.data.user.token);
       localStorage.setItem("token", response.data.user.token);
+      navigate('/home')
     } catch (error) {
       console.error("Signup failed:", error);
     }
@@ -64,8 +69,8 @@ export default function Auth() {
     });
   };
 
-  const [moveToRegister, setmoveToRegister] = useState(true);
-  const [moveToLogin, setMoveToLogin] = useState(false);
+  const [moveToRegister, setmoveToRegister] = useState(false);
+  const [moveToLogin, setMoveToLogin] = useState(true);
   const [moveToOtp, setMoveToOtp] = useState(false);
   const [moveToforget, setMoveToForget] = useState(false);
   const [moveToReset, setMoveToReset] = useState(false);
