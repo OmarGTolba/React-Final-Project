@@ -61,7 +61,7 @@ function App() {
             <Route path="/products" element={<AllProducts />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/product-details" element={<ProductDetails/>} />
+            <Route path="/product-details/:id" element={<ProductDetails/>} />
           </Routes>
           {/* <Footer/> */}
         </ThemeProvider>

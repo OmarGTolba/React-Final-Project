@@ -8,9 +8,18 @@ import Typography from '@mui/material/Typography';
 import BuildIcon from '@mui/icons-material/Build';
 import { FaHammer } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+
 export default function ProductCard({ product ,addToCart }) {
+    
     const navigate = useNavigate()
-   const navigateToBidDetail=(id)=>{
+
+
+const navigateToDetails = (id)=>{
+
+    navigate(`/product-details/${id}`)
+}
+
+    const navigateToBidDetail=(id)=>{
 console.log(product)
     navigate(`/bid/${id}`)
     }
@@ -21,23 +30,34 @@ console.log(product)
                 image="../public/PlaceholderGlossary.svg"
                
             />
-        {!product.expirationDate && (
+        {product.expirationDate && (
                     <FaHammer sx={{ marginRight: 1 }} style={{ position: 'absolute', top: '10px', right: '5px' }} />
                 )}    <CardContent>
                 <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography variant="body2" color="text.secondary"></Typography>
-                    <Typography variant="body2" color="text.secondary">$</Typography>
+                    <Typography variant="body2" color="text.secondary">{product.title}</Typography>
+                    <Typography variant="body2" color="text.secondary">{product.categoryId.title}</Typography>
                 </CardActions>
-                <Typography gutterBottom variant="h5" component="div"></Typography>
-                <Typography variant="body2" color="text.secondary"></Typography>
+                <Typography gutterBottom variant="h5" component="div">{product.price}</Typography>
+                <Typography variant="body2" color="text.secondary">{product.addingDate}</Typography>
             </CardContent>
             <CardActions>
             
             {!product.expirationDate && (
                   
                 <Button sx={{ width: '100%', backgroundColor: '#ccc' }} onClick={addToCart}>Add to Cart</Button>
+               
                 )}
             
+
+            {!product.expirationDate && (
+                  
+                  <Button sx={{ width: '100%', backgroundColor: '#ccc' }} onClick={()=>{
+                    navigateToDetails(product._id)
+                  }}>view</Button>
+                 
+                  )}
+              
+
 
 
             {product.expirationDate && (

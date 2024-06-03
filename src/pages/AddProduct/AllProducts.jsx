@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "../../components/ProductCard";
+import { Button } from "bootstrap";
+import ProductsContext from "../../contexts/ProductsContext";
+import CategoryContext from "../../contexts/CategoriesContext";
+import axios from "axios";
+import AuctionContext from "../../contexts/AuctionContext";
 import {
   Box,
   Container,
@@ -10,11 +15,6 @@ import {
   Radio,
   Pagination,
 } from "@mui/material";
-import { Button } from "bootstrap";
-import ProductsContext from "../../contexts/ProductsContext";
-import CategoryContext from "../../contexts/CategoriesContext";
-import axios from "axios";
-import AuctionContext from "../../contexts/AuctionContext";
 
 export default function AllProducts() {
   const { products } = useContext(ProductsContext);
@@ -24,16 +24,15 @@ export default function AllProducts() {
   const [searchLocation, setSearchLocation] = useState([]);
   const [searchCategory, setSearchCategory] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-
-
   const productsPerPage = 3; // Number of products to display per page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  console.log(products);
   const currentProducts = displayedProducts?.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
-
+console.log(auction);
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
@@ -65,8 +64,6 @@ export default function AllProducts() {
       const dp = products.products.filter(
         (product) => product?.categoryId?.title === event.target.value
       );
-      console.log(dp);
-      console.log(event.target.value);
       setDisplayedProducts(dp);
       return;
     } else {
@@ -75,8 +72,6 @@ export default function AllProducts() {
           product?.categoryId?.title === event.target.value &&
           product?.location === searchLocation
       );
-      console.log(dp);
-      console.log(event.target.value);
       setDisplayedProducts(dp);
     }
     setCurrentPage(1);
@@ -174,7 +169,7 @@ export default function AllProducts() {
           </Box>
           <Box sx={{ width: "75%", margin: "auto", marginTop: 2 }}>
             <FormControl>
-              <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+              <FormLabel id="demo-radio-buttons-group-label">City</FormLabel>
               <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="female"

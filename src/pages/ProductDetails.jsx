@@ -13,9 +13,40 @@ import MailIcon from '@mui/icons-material/Mail';
 import Grid from '@mui/material/Grid';
 import { Rating, Typography } from '@mui/material';
 import SimilarItems from '../components/SimilarItems';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
 // import Image from '@mui/material/Image';
 
 export default function ProductDetails() {
+  const {id} = useParams()
+
+const [product,setProduct]= useState({})
+
+  useEffect(() => {
+    const fetchBid = async () => {
+        try {
+            const response = await axios.get(`http://127.0.0.1:3000/api/v1/products/get-product/${id}`, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'jwt': localStorage.getItem('token')
+                }
+            });
+            const data = response.data;
+          
+         console.log(data);
+     setProduct(data.product)
+        } catch (error) {
+            console.error('Error fetching bid:', error);
+        }
+    };
+
+    fetchBid();
+}, [id]);
+
+
+
     const [value, setValue] = React.useState(4);
     const items = [
         { title: 'MacBook Pro MNEH3', image: '../public/villa2.jpg' },
@@ -45,7 +76,7 @@ export default function ProductDetails() {
           onClick={toggleDrawer(anchor, false)}
           onKeyDown={toggleDrawer(anchor, false)}
         >
-         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione ut consequuntur ipsam adipisci excepturi perspiciatis atque quidem tempora itaque tenetur? Ipsum, delectus culpa sequi aut quibusdam dolores. Consectetur, obcaecati possimus?
+     
         </Box>
       );
     
@@ -81,7 +112,7 @@ export default function ProductDetails() {
         />
       </Grid>
       <Grid item  xs={6} sx={{ height: '100%',width:'100%' }}>
-        <Typography sx={{ width:'100%',marginBottom:'10px' }} variant='h4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, aperiam.</Typography>
+        <Typography sx={{ width:'100%',marginBottom:'10px' }} variant='h4'> {product.title}</Typography>
      <Box sx={{display:'flex'}} my={2}>
        <Rating name="read-only" value={value} readOnly sx={{color:'#76a85f' , marginRight:'35px'}} />
         <Typography>4 Stars</Typography>
@@ -89,7 +120,7 @@ export default function ProductDetails() {
      
      <div className='d-flex'>
 
-        <Typography margin={1} sx={{display:'flex' }}>lorem ipsum</Typography>
+        <Typography margin={1} sx={{display:'flex' }}>{product?.userId?.firstName + ' ' +product?.userId?.lastName }</Typography>
         <Typography margin={1} sx={{display:'flex'}}>lorem ipsum</Typography>
      </div>
      

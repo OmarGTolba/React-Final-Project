@@ -17,7 +17,7 @@ const items = [
 
 const BidPage = () => {
     const{id}= useParams()
-    console.log(id);
+   
     useEffect(() => {
         const fetchBid = async () => {
             try {
@@ -29,8 +29,20 @@ const BidPage = () => {
                 });
 
                 const data = response.data;
-                console.log(data);
-                // Handle the response data as needed
+               
+                setAuction(response.data.auction)
+
+                const now = Date.now();
+                
+
+              const expirDate = new Date (response.data.auction.expirationDate)
+                const differenceInMs = expirDate - now;
+          
+                const hours = Math.floor(differenceInMs / (1000 * 60 * 60));
+                const minutes = Math.floor((differenceInMs % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((differenceInMs % (1000 * 60)) / 1000);
+          
+                
             } catch (error) {
                 console.error('Error fetching bid:', error);
             }
@@ -41,9 +53,9 @@ const BidPage = () => {
 
     const [highestBid, setHighestBid] = useState(2500);
     const [heartCount, setHeartCount] = useState(0);
+    const[auction,setAuction]=useState({})
+    
 
-const{auction}= useContext(AuctionContext)
-// console.log(auction);
 
     const handleBid = (amount) => {
         setHighestBid((prev) => prev + amount);
@@ -54,7 +66,7 @@ const{auction}= useContext(AuctionContext)
             <CssBaseline />
             {/* <Navbar  /> */}
             <Container>
-                <BidCard onBid={handleBid} highestBid={highestBid} />
+                <BidCard auction={auction} onBid={handleBid} highestBid={highestBid} />
 
 
                 <Typography variant="h6" mt={4}>

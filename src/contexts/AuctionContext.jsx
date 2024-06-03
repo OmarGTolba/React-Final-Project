@@ -10,12 +10,13 @@ export const AuctionProvider = ({ children }) => {
   
   const fetchAuction = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/v1/auth/get-bids');
+      const response = await fetch('http://localhost:3000/api/v1/get-auctions');
       if (!response.ok) {
         throw new Error('Failed to fetch Auction');
       }
       const data = await response.json();
-      setAuction(data.bids);
+      console.log(data);
+      setAuction(data.auctions);
     } catch (error) {
       console.error('Error fetching Auction:', error);
     }
