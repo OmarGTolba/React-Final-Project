@@ -25,7 +25,7 @@ export const CartProvider = ({ children }) => {
             setCartItems(response.data.cart);
         } catch (err) {
             console.error(err);
-            alert('Failed to fetch cart items');
+          //  alert('Failed to fetch cart items');
         }
     };
 

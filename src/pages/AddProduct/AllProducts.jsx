@@ -114,7 +114,7 @@ setDisplayedProducts(dp)
       // alert('Product added successfully');
   } catch (err) {
       console.error(err);
-      alert('Failed to add product');
+    //  alert('Failed to add product');
   }
 }
 
@@ -125,7 +125,7 @@ setDisplayedProducts(dp)
     <>
     <Container sx={{display:'flex' , marginTop:'20px' , justifyContent:'space-between'}} >
 
-        <Box sx={{width:'25%' , height:'82vh', backgroundColor:'#ccc'}} >
+        <Box sx={{width:'25%' , height:'82vh', border:'3px solid #76a85f',borderRadius:'10px', padding:'10px' ,color:'#76a85f'}} >
 <Box sx={{width:'75%', margin:'auto' , marginTop:2}}>
 <FormControl>
   <FormLabel id="demo-radio-buttons-group-label">Categories</FormLabel>

@@ -6,6 +6,7 @@ import { CategoryProvider } from './contexts/CategoriesContext.jsx'
 import { UserProvider } from './contexts/UserContext.jsx'
 import { ProductsProvider } from './contexts/ProductsContext.jsx'
 import { CartProvider } from './contexts/CartContext.jsx'
+import { BrowserRouter } from 'react-router-dom'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,10 +14,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <CategoryProvider>
       <ProductsProvider>
         <CartProvider>
-          
+          <BrowserRouter>
         <React.StrictMode>
           <App />
         </React.StrictMode>,
+          </BrowserRouter>
 
         </CartProvider>
       </ProductsProvider>
