@@ -126,7 +126,6 @@ const PlaceOrder = () => {
     const totalCash = totalPrice + COD + Tax
     return (
         <Container>
-
             <Box mt={4}>
                 <Typography sx={{ marginLeft: '16px', borderBottom: '2px solid #66BB6A', lineHeight: '50px', width: '100%', color: '#66BB6A', fontWeight: 'bold', fontSize: '22px', display: 'flex', alignItems: 'center' }} variant="h5" mb={2}>
                     <HomeIcon /> Shipping Address
