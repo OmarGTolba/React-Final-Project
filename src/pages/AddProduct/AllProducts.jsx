@@ -122,8 +122,6 @@ console.log(auction);
       );
       console.log(resp);
     } catch (err) {
-    } catch (err) {
-      console.error(err);
     }
   }
 
