@@ -7,6 +7,7 @@ import { UserProvider } from './contexts/UserContext.jsx'
 import { ProductsProvider } from './contexts/ProductsContext.jsx'
 import { CartProvider } from './contexts/CartContext.jsx'
 import { BrowserRouter } from 'react-router-dom'
+import { AuctionProvider } from './contexts/AuctionContext.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -14,12 +15,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <CategoryProvider>
       <ProductsProvider>
         <CartProvider>
+          <AuctionProvider>
           <BrowserRouter>
         <React.StrictMode>
           <App />
         </React.StrictMode>,
           </BrowserRouter>
-
+          </AuctionProvider>
         </CartProvider>
       </ProductsProvider>
     </CategoryProvider>

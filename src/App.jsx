@@ -51,7 +51,7 @@ function App() {
           <Routes>
             <Route path="/profile" element={<Profile />} />
             {/* <Route path="addAddress" element={<AddAddressForm/>} /> */}
-            <Route path="/bid" element={<BidPage />} />
+            <Route path="/bid/:id" element={<BidPage />} />
             <Route path="/orderDone" element={<OrderDone />} />
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />

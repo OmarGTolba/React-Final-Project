@@ -158,7 +158,7 @@ export default function Auth() {
         className={`clipped-element ${moveToRegister ? "move-bottom" : ""}`}
       ></Box>
 
-      {/* registeration Box */}
+      {/* regisnteration Box */}
       <Grid
   container
   className={`inputs  ${moveToRegister ? "d-block" : "d-none"} ${
