@@ -39,27 +39,28 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {!isAuthRoute && <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode} />}
-        <Routes>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/bid" element={<BidPage />} />
-          <Route path="/orderDone" element={<OrderDone />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/placeOrder" element={<PlaceOrder />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/add-product" element={<AddProduct />} />
-          <Route path="/products" element={<AllProducts />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/product-details" element={<ProductDetails />} />
-        </Routes>
-        {!isAuthRoute && <Footer toggleDarkMode={toggleDarkMode} darkMode={darkMode} />}
-      </ThemeProvider>
-
+    <div className="App">  
+        <ThemeProvider theme={theme}>
+          <CssBaseline/>
+          {!isAuthRoute && <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}
+          <Routes>
+            <Route path="/profile" element={<Profile />} />
+            {/* <Route path="addAddress" element={<AddAddressForm/>} /> */}
+            <Route path="/bid/:id" element={<BidPage />} />
+            <Route path="/orderDone" element={<OrderDone />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/placeOrder" element={<PlaceOrder />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/products" element={<AllProducts />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/product-details/:id" element={<ProductDetails/>} />
+          </Routes>
+          {/* <Footer/> */}
+        </ThemeProvider>
+     
     </div>
   );
 }

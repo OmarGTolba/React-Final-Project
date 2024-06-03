@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Card, CardContent, Typography, Box, Button, TextField, Container } from '@mui/material';
 import CircularWithValueLabel from './CircleProgress';
 
-const AuctionCard = () => {
-
+const AuctionCard = ({auction}) => {
+console.log(auction);
     return (
         <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', marginTop: '15px' }}>
             <img src="../../public/villa.jpg" alt="Villa" style={{ maxWidth: '450px', height: '620px' }} />

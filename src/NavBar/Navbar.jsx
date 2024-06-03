@@ -147,15 +147,6 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
             </Box>
 
 
-            <Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
-              <Link id="RouterNavLink" to={'bid'} className='text-decoration-none h5 mx-2 ' >BidPage </Link>
-            </Box>
-
-
-            <Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
-              <Link id="RouterNavLink" to={'login'} className='text-decoration-none h5 mx-2 ' >login </Link>
-            </Box>
-
 
             <Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
               <Link id="RouterNavLink" to={'cart'} className='text-decoration-none h5 mx-2 ' >cart </Link>
