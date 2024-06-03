@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import {
     Box,
     Card,
-    CardContent,
     Typography,
     Modal,
     TextField,
     Button,
     IconButton,
 } from '@mui/material';
-import { AddCircleOutline, Close } from '@mui/icons-material';
+import { Close } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import PaymentCard from '../components/PaymentCard';
 
@@ -69,12 +68,12 @@ function Payment() {
     };
 
     return (
-        <Box>
+        <Box sx={{display:'flex' , flexDirection:'column' , alignItems:'flex-start'}}>
             <Typography sx={{ marginTop: '10%', padding: '10px', textAlign: 'left' }} variant="h4" component="h1" align="center">
                 Your Payment Methods
             </Typography>
             <PaymentMethodsContainer sx={{ padding: '10px' }}>
-                <AddMethodCard onClick={handleOpen} sx={{ width: '60%' }}>
+                <AddMethodCard onClick={handleOpen} sx={{ width: '40%', display:'flex' }}>
                     <Box sx={{color:'#66BB6A', fontWeight:'bold' , fontSize:'80px'}}>+</Box>
                     <Typography sx={{color:"#66BB6A"}}>Add Method</Typography>
                 </AddMethodCard>

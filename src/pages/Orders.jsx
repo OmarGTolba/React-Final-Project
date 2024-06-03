@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Box, ButtonBase, Typography, Grid, Card } from '@mui/material';
+import { Container, Box, ButtonBase, Typography, Card } from '@mui/material';
 import OrderCard from '../components/OrderCard';
 import AuctionCard from '../components/AuctionCard';
 import Slider from 'react-slick';
@@ -16,7 +16,6 @@ const activeBidsObj = [
         yourBid: 20,
         highestBid: 50,
         timeLeft: '2 hours left',
-        // bidder:'YOU LOST'
     },
     {
         id: 2,
@@ -25,9 +24,7 @@ const activeBidsObj = [
         yourBid: 20,
         highestBid: 50,
         timeLeft: '2 hours left',
-        // bidder:'YOU WON'
     }
-    // Add more items...
 ];
 
 const pendingOrdersObj = [
@@ -41,7 +38,6 @@ const pendingOrdersObj = [
         title: 'Hair and face care by Curology',
         image: '../../public/shmpo.jpg',
     },
-    // Add more items...
 ];
 
 const completedBids = [
@@ -83,7 +79,6 @@ const completedBids = [
         bidder:'YOU WON',
         checkWinner:'lost'
     }
-    // Add more items...
 ];
 
 const completedOrders = [
@@ -111,31 +106,26 @@ const completedOrders = [
         image: '../../public/labtop.jpg',
         status:'Delivered'
     }
-    // Add more items...
 ];
 
 
 function Orders() {
     const [activeTab, setActiveTab] = useState('active');
+    const sliderSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3, 
+        slidesToScroll: 2, 
+    };
 
     const handleTabToggle = (tab) => {
         setActiveTab(tab);
     };
 
-
-    const sliderSettings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3, // Show up to 3 slides or less if there are fewer items
-        slidesToScroll: 2, 
-        // centerMode: true,
-        // leftMode:true
-    };
-
-
     return (
         <Container sx={{ position: 'relative', width: '100%' }}>
+
         {/* Green box containing toggle buttons */}
         <Box bgcolor="#5DAA60" display={'flex'} p={2} mb={4} padding={1.5} borderRadius={'0px 0px 20px 20px'} width={'21%'} justifyContent={'center'}>
             <ButtonBase
@@ -145,7 +135,7 @@ function Orders() {
                     color: 'white',
                     borderBottom: activeTab === 'active' && '4px solid white',
                     mr: 2,
-                    borderRadius: 1, // Added border radius
+                    borderRadius: 1, 
                     padding: '0px 0px'
                 }}
             >
@@ -157,7 +147,7 @@ function Orders() {
                     bgcolor: activeTab === 'complete' && '#5DAA60',
                     color: 'white',
                     borderBottom: activeTab === 'complete' && '4px solid white',
-                    borderRadius: 1, // Added border radius
+                    borderRadius: 1, 
                     padding: '0px 0px'
                 }}
             >
@@ -199,9 +189,9 @@ function Orders() {
                 </Box>
             </>
         )}
+
         {activeTab === 'complete' && (
             <>
-
                 <Box mb={4}>
                     <Typography variant="h6" component="h2" fontWeight="bold" mb={2}>
                         Completed Bids

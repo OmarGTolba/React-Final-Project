@@ -3,5 +3,5 @@
   height: 100px;
   background-color: #ccc;
   margin: 5px;
-  transition: transform 5s ease; /* Add transition effect */
+  transition: transform 5s ease;
 }
