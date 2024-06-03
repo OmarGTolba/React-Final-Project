@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Login from './Authentication/Auth.jsx'; 
+import Login from './Authentication/Auth.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './NavBar/Navbar.jsx';
-import MainCard from './components/MainCard.jsx';
-import FlipCard from './components/FlipCard.jsx';
-import CardHeader from './components/CardHeader.jsx';
-import { Box, Container, CssBaseline } from '@mui/material';
-import Hero from './Hero.jsx/Hero.jsx';
+import {  CssBaseline } from '@mui/material';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AllProducts from './pages/AddProduct/AllProducts.jsx';
@@ -19,7 +15,6 @@ import PlaceOrder from './pages/PlaceOrder.jsx';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import BidPage from './pages/BidPage.jsx';
 import Footer from './components/Footer.jsx';
-import AddAddressForm from './components/AddAddressForm.jsx';
 import OrderDone from './pages/OrderDone.jsx';
 import ProductDetails from './pages/ProductDetails.jsx';
 
@@ -35,7 +30,7 @@ function App() {
 
   const theme = createTheme({
     palette: {
-        mode: darkMode ? 'dark' : 'light',
+      mode: darkMode ? 'dark' : 'light',
     },
   });
 

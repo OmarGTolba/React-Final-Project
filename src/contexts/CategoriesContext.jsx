@@ -22,8 +22,6 @@ export const CategoryProvider = ({ children }) => {
     fetchCategories();
   }, []); 
 
-
-
   return (
     <CategoryContext.Provider value={{ categories }}>
       {children}

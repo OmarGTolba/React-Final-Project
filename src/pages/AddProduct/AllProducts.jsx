@@ -122,6 +122,7 @@ console.log(auction);
       );
       console.log(resp);
     } catch (err) {
+    } catch (err) {
       console.error(err);
     }
   }
@@ -196,6 +197,7 @@ console.log(auction);
             </FormControl>
           </Box>
 
+          <button>Search</button>
           <button>Search</button>
         </Box>
         <Box

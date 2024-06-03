@@ -3,55 +3,43 @@ import { Card, CardMedia, CardContent, Typography, Button, ButtonBase, Box } fro
 
 const OrderCard = ({ order, onCancelClick }) => {
 
-    const [win, setWin] = useState(false)
     console.log(order);
     console.log(order.image);
     return (
-        <Card sx={{marginLeft:'15px'}}>
-        <Box sx={{ position: 'relative', padding:'5px'}}>
-            <CardMedia
-                component="img"
-                height="250px"
-                sx={{borderRadius:'5px'}}
-                image={order.image}
-                alt={order.title}
-            />
+        <Card sx={{ marginLeft: '15px' }}>
+            <Box sx={{ position: 'relative', padding: '5px' }}>
+                <CardMedia
+                    component="img"
+                    height="250px"
+                    sx={{ borderRadius: '5px' }}
+                    image={order.image}
+                    alt={order.title}
+                />
 
-        </Box>
-        <CardContent sx={{padding:'5px', marginTop:'25px'}}>
-            <Typography gutterBottom variant="h5" component="div">
-                {order.title}
-            </Typography>
-            <Box textAlign={'center'}> 
-
-            <ButtonBase
-            sx={{                
-                borderRadius:'5px',
-                fontWeight:'bold',
-                fontSize:'12px',
-                padding:'9px 25px',
-                backgroundColor:'#DC1F1F',
-                color: '#fff',marginTop:'22px', '&:hover':{backgroundColor:'#fff' ,color:'#DC1F1F', outline:'2px solid #DC1F1F'}}}
-                variant="contained"
-                onClick={() => onCancelClick(order?.id)}
-            >
-                Cancel order
-            </ButtonBase>
             </Box>
-        </CardContent>
-    </Card>
-        // <Card>
-        //     <CardMedia component="img" height="250" image={order?.image} alt={order?.title} />
+            <CardContent sx={{ padding: '5px', marginTop: '25px' }}>
+                <Typography gutterBottom variant="h5" component="div">
+                    {order.title}
+                </Typography>
+                <Box textAlign={'center'}>
 
-        //     <CardContent>
-        //         <Typography gutterBottom variant="h5" component="div">
-        //             {order?.title}
-        //         </Typography>
-        //         <Button variant="contained" color="secondary" onClick={() => onCancelClick(order?.id)}>
-        //             Cancel order
-        //         </Button>
-        //     </CardContent>
-        // </Card>
+                    <ButtonBase
+                        sx={{
+                            borderRadius: '5px',
+                            fontWeight: 'bold',
+                            fontSize: '12px',
+                            padding: '9px 25px',
+                            backgroundColor: '#DC1F1F',
+                            color: '#fff', marginTop: '22px', '&:hover': { backgroundColor: '#fff', color: '#DC1F1F', outline: '2px solid #DC1F1F' }
+                        }}
+                        variant="contained"
+                        onClick={() => onCancelClick(order?.id)}
+                    >
+                        Cancel order
+                    </ButtonBase>
+                </Box>
+            </CardContent>
+        </Card>
     );
 };
 

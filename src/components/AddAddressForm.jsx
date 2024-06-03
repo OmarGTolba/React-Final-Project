@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Modal, TextField, Button, IconButton, Typography, Box } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { Container, Typography, TextField, Button, Paper } from '@mui/material';
 
-const AddAddressForm = ({ open, handleClose, handleSubmit }) => {
-    const [newAddress, setNewAddress] = useState({
-        id: '',
+const AddAddressForm = ({ open, handleClose, handleAddAddress }) => {
+    const [formData, setFormData] = useState({
+        name: '',
         street: '',
         city: '',
         zone: '',
@@ -13,39 +12,83 @@ const AddAddressForm = ({ open, handleClose, handleSubmit }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setNewAddress((prevAddress) => ({
-            ...prevAddress,
+        setFormData((prevFormData) => ({
+            ...prevFormData,
             [name]: value,
         }));
     };
 
-    const handleFormSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        handleSubmit(newAddress);
+        handleAddAddress(formData);
         handleClose();
     };
 
+    if (!open) return null;
+
     return (
-        <Modal open={open} onClose={handleClose}>
-            <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '400px', backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
-                <IconButton style={{ position: 'absolute', right: 10, top: 10 }} onClick={handleClose}>
-                    <Close />
-                </IconButton>
-                <Typography variant="h6" component="h2">
-                    Add New Address
+        <Container component="main">
+            <Paper style={{ padding: 20 }}>
+                <Typography variant="h5" gutterBottom>
+                    Add Address
                 </Typography>
-                <form onSubmit={handleFormSubmit} style={{ marginTop: '20px' }}>
-                    <TextField fullWidth label="ID" name="id" margin="normal" required value={newAddress.id} onChange={handleChange} />
-                    <TextField fullWidth label="Street" name="street" margin="normal" required value={newAddress.street} onChange={handleChange} />
-                    <TextField fullWidth label="City" name="city" margin="normal" required value={newAddress.city} onChange={handleChange} />
-                    <TextField fullWidth label="Zone" name="zone" margin="normal" required value={newAddress.zone} onChange={handleChange} />
-                    <TextField fullWidth label="Country" name="country" margin="normal" required value={newAddress.country} onChange={handleChange} />
-                    <Button type="submit" variant="contained" color="primary" sx={{ marginTop: '20px' }}>
+                <form noValidate onSubmit={handleSubmit}>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="name"
+                        label="Name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="street"
+                        label="Street"
+                        name="street"
+                        value={formData.street}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="city"
+                        label="City"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="zone"
+                        label="Zone"
+                        name="zone"
+                        value={formData.zone}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="country"
+                        label="Country"
+                        name="country"
+                        value={formData.country}
+                        onChange={handleChange}
+                    />
+                    <Button type="submit" fullWidth variant="contained" color="primary">
                         Add Address
                     </Button>
                 </form>
-            </Box>
-        </Modal>
+            </Paper>
+        </Container>
     );
 };
 

@@ -33,7 +33,7 @@ const Shape2 = styled(Box)(({ theme }) => ({
   borderRadius: '50%',
 }));
 
-const PaymentCard = ({cardId, cardName, cardNumber, name, number, card, selectedCard, setSelectedCard, handleCardClick }) => {
+const PaymentCard = ({ cardId, cardName, cardNumber, name, number, card, selectedCard, setSelectedCard, handleCardClick }) => {
   const [cvv, setCvv] = useState('');
   const [isEditingCvv, setIsEditingCvv] = useState(false);
 
@@ -44,7 +44,6 @@ const PaymentCard = ({cardId, cardName, cardNumber, name, number, card, selected
 
   const handleCardClickWithCvv = (cardId) => {
     if (isEditingCvv) {
-      // Finish editing CVV before toggling the card state
       setIsEditingCvv(false);
       return;
     }
@@ -57,7 +56,7 @@ const PaymentCard = ({cardId, cardName, cardNumber, name, number, card, selected
   };
 
   return (
-    <CardContainer onClick={() => handleCardClickWithCvv(cardId)} sx={{cursor:'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <CardContainer onClick={() => handleCardClickWithCvv(cardId)} sx={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       {+selectedCard === +cardId ? (
         <TextField
           id="cvv"
@@ -72,7 +71,6 @@ const PaymentCard = ({cardId, cardName, cardNumber, name, number, card, selected
             "& .MuiOutlinedInput-root": {
               fontWeight: 'bold',
               color: 'black',
-              // zIndex:'5555555555555',
               borderColor: '#aea',
               '&:hover fieldset': {
                 borderColor: '#5DAA60',
@@ -97,10 +95,7 @@ const PaymentCard = ({cardId, cardName, cardNumber, name, number, card, selected
               Name
             </Typography>
             <Box>
-            <Typography variant="h6">{name}</Typography>
-            {/* <Typography variant="body2" sx={{ position: 'absolute', bottom: '20px', left: '20px' }}>
-              {number}
-            </Typography> */}
+              <Typography variant="h6">{name}</Typography>
             </Box>
             <Typography variant="h6">{cardName}</Typography>
             <Typography variant="h6">{cardNumber}</Typography>

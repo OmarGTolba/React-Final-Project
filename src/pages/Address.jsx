@@ -1,57 +1,20 @@
 import React, { useState } from 'react';
-import { Box, Card, CardContent, Typography, Modal, Button, IconButton } from '@mui/material';
-import { AddCircleOutline, Close, Delete } from '@mui/icons-material';
-import { styled } from '@mui/system';
+import { Container, Typography, Box, Button, Card, CardContent, CardActions, IconButton } from '@mui/material';
+import { Delete, Edit } from '@mui/icons-material';
 import AddAddressForm from '../components/AddAddressForm';
 import EditAddressForm from '../components/EditAddressForm';
-import { useNavigate } from 'react-router-dom';
-
-const AddAddressCard = styled(Card)({
-    border: '2px dashed #66BB6A    ',
-    padding: '20px',
-    width: '200px',
-    height: '150px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    cursor: 'pointer',
-    textAlign: 'center',
-});
-
-const AddressContainer = styled(Box)({
-    display: 'flex',
-    gap: '20px',
-    justifyContent: 'center',
-    marginTop: '20px',
-});
-
-const AddressCard = styled(Card)({
-    width: '200px',
-    height: '200px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-});
 
 const Address = () => {
-    const navigate = useNavigate();
     const [openAdd, setOpenAdd] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
     const [addresses, setAddresses] = useState([
         {
             id: 1,
-            street: '123 Main St',
-            city: 'Anytown',
-            zone: 'ABC',
-            country: 'XYZ',
-        },
-        {
-            id: 2,
-            street: '456 Elm St',
-            city: 'Othertown',
-            zone: 'DEF',
-            country: 'UVW',
+            name: 'Mohamed Ayman Mostafa',
+            street: 'Shbeen street',
+            city: 'Jasmine Tower',
+            zone: 'Ismailia Free zone',
+            country: 'Egypt',
         },
     ]);
     const [editingAddress, setEditingAddress] = useState(null);
@@ -64,15 +27,21 @@ const Address = () => {
         setOpenEdit(true);
     };
 
-    const handleCloseEdit = () => setOpenEdit(false);
+    const handleCloseEdit = () => {
+        setEditingAddress(null);
+        setOpenEdit(false);
+    };
 
     const handleAddAddress = (newAddress) => {
+        newAddress.id = addresses.length ? addresses[addresses.length - 1].id + 1 : 1;
         setAddresses([...addresses, newAddress]);
+        setOpenAdd(false);
     };
 
     const handleEditAddress = (editedAddress) => {
         setAddresses(addresses.map((address) => (address.id === editedAddress.id ? editedAddress : address)));
         setEditingAddress(null);
+        setOpenEdit(false);
     };
 
     const handleDelete = (id) => {
@@ -80,58 +49,54 @@ const Address = () => {
     };
 
     return (
-        <Box>
-            <Typography sx={{ marginTop: '6%', padding: '10px', textAlign: 'left' }} variant="h4" component="h1" align="center">
+        <Container sx={{ width: '100%', marginTop: '10%' }}>
+            <Typography sx={{ padding: '10px' }} variant="h5" gutterBottom>
                 Your Addresses
             </Typography>
-            <AddressContainer sx={{ padding: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-                <AddAddressCard onClick={handleOpenAdd}>
-                    <Typography sx={{ color: '#66BB6A', fontSize: '80px', cursor: 'pointer' }} >+</Typography>
-                </AddAddressCard>
-                {addresses.map((address) => (
-                    <AddressCard key={address.id} sx={{display:'flex',height:'auto'}}>
-                        <CardContent>
-                            <Typography sx={{ color: '#66BB6A', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
-                                Street
-                            </Typography>
-                            <Typography sx={{ color: 'black', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
-                                {address.street}
-                            </Typography>
-                            <Typography sx={{ color: '#66BB6A', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
-                                City
-                            </Typography>
-                            <Typography sx={{ color: 'black', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
-                                {address.city}
-                            </Typography>
-                            <Typography sx={{ color: '#66BB6A', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
-                                Zone
-                            </Typography>
-                            <Typography sx={{ color: 'black', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
-                                {address.zone}
-                            </Typography>
-                            <Typography sx={{ color: '#66BB6A', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
-                                Country
-                            </Typography>
-                            <Typography sx={{ color: 'black', fontWeight: 'bold' }} gutterBottom variant="p" component="div">
-                                {address.country}
-                            </Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                            <Button onClick={() => handleOpenEdit(address)} sx={{ color: '#fff', backgroundColor: '#66BB6A', '&:hover': { color: '#66BB6A', backgroundColor: '#fff', border: '2px solid #66BB6A' } }}>
-                                Edit
-                            </Button>
-                            <IconButton color="black" onClick={() => handleDelete(address.id)}>
-                                <Delete />
-                            </IconButton>
-                        </Box>
-                        </CardContent>
-                    </AddressCard>
-                ))}
-            </AddressContainer>
-            <AddAddressForm open={openAdd} handleClose={handleCloseAdd} handleSubmit={handleAddAddress} />
+            {
+                !editingAddress && !openAdd &&
+                <Box sx={{ display: 'flex', p: 3, gap: '20px', flexWrap: 'wrap', padding: '10px' }}>
+                    <Button
+                        variant="outlined"
+                        onClick={handleOpenAdd}
+                        sx={{ color: '#5DAA60', fontWeight: 'bold', fontSize: '45px', border: '2px solid #5DAA60', borderStyle: 'dashed', width: '15%' }}
+                    >
+                        +
+                    </Button>
+                    {addresses.map((address) => (
+                        <Card key={address.id} sx={{ width: '30%' }}>
+                            <CardContent>
+                                <Typography gutterBottom variant="h6" component="div">
+                                    {address.name}
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    {address.street}
+                                    <br />
+                                    {address.city}
+                                    <br />
+                                    {address.zone}
+                                    <br />
+                                    {address.country}
+                                </Typography>
+                            </CardContent>
+                            <CardActions sx={{display:'flex', justifyContent:'space-around'}}>
+                                <IconButton size="small" onClick={() => handleOpenEdit(address)} color="primary">
+                                    <Edit />
+                                </IconButton>
+                                <IconButton color="error" onClick={() => handleDelete(address.id)}>
+                                    <Delete />
+                                </IconButton>
+                            </CardActions>
+                        </Card>
+                    ))}
+                </Box>
+            }
+            {/* Add Address Component */}
+            {openAdd && <AddAddressForm open={openAdd} handleClose={handleCloseAdd} handleAddAddress={handleAddAddress} />}
+            {/* Edit Address Component */}
             {editingAddress && <EditAddressForm open={openEdit} handleClose={handleCloseEdit} address={editingAddress} handleSaveEdit={handleEditAddress} />}
-        </Box>
+        </Container>
     );
 };
 
 export default Address;
-

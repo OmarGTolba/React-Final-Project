@@ -17,9 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <CartProvider>
           <AuctionProvider>
           <BrowserRouter>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>,
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>,
           </BrowserRouter>
           </AuctionProvider>
         </CartProvider>

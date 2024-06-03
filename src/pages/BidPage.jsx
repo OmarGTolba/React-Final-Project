@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from 'react';
 import { CssBaseline, Container, Typography } from '@mui/material';
-// import Navbar from './components/Navbar';
 import BidCard from '../components/BidCard';
 import SimilarItems from '../components/SimilarItems';
 import AuctionContext from '../contexts/AuctionContext';
@@ -64,7 +63,6 @@ const BidPage = () => {
     return (
         <div>
             <CssBaseline />
-            {/* <Navbar  /> */}
             <Container>
                 <BidCard auction={auction} onBid={handleBid} highestBid={highestBid} />
 

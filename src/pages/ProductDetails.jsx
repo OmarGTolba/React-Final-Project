@@ -156,7 +156,4 @@ const [product,setProduct]= useState({})
 
     </>
   );
-    
-    
-
 }

@@ -1,33 +1,14 @@
-import React, { createContext, useEffect, useState, useContext } from 'react';
-import axios from 'axios';
-import UserContext from './UserContext';
+import React, { createContext, useState } from 'react';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
-    const { token } = useContext(UserContext);
+    const [cartItems, setCartItems] = useState([
+        { id: 1, name: 'Smart watch', color: 'White', size: 'L', price: 300, quantity: 1, image: '../../public/watch.jpg',tax:'50',cod:'70' },
+        { id: 2, name: 'Shoes', color: 'Black', size: 'L', price: 600, quantity: 2, image: '../../public/shoes.jpg',tax:'50',cod:'70' }
+    ]);
 
-    useEffect(() => {
-        if (token) {
-            getCart();
-        }
-    }, [token]);
-
-    const getCart = async () => {
-        try {
-            const response = await axios.get('http://127.0.0.1:3000/api/v1/auth/cart', {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'jwt': token
-                }
-            });
-            setCartItems(response.data.cart);
-        } catch (err) {
-            console.error(err);
-          //  alert('Failed to fetch cart items');
-        }
-    };
+    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
     const addToCart = (item) => {
         setCartItems(prevItems => [...prevItems, item]);
@@ -38,8 +19,6 @@ export const CartProvider = ({ children }) => {
             prevItems.map(item => (item.id === id ? { ...item, quantity } : item))
         );
     };
-
-    const totalItems = 0
 
     return (
         <CartContext.Provider value={{ cartItems, addToCart, updateCartItemQuantity, totalItems, setCartItems }}>
