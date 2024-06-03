@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
@@ -23,11 +22,11 @@ function CircularProgressWithLabel(props) {
                 value={100}
                 style={{
                     width: "400px", height: "400px",
-                    '& circle[stroke-width]': { // Target the circle element with a stroke-width attribute
-                        strokeWidth: '2px' // Adjust the strokeWidth as needed
+                    '& circle[stroke-width]': {
+                        strokeWidth: '2px'
                     },
-                    color: '#98D19B', // Set color to black with reduced opacity
-                    position: 'absolute', // Position it absolutely
+                    color: '#98D19B',
+                    position: 'absolute',
                 }}
                 thickness={2}
                 strokeLinecap={'round'}
@@ -38,10 +37,10 @@ function CircularProgressWithLabel(props) {
                 value={props.value}
                 style={{
                     width: "400px", height: "400px",
-                    '& circle[stroke-width]': { // Target the circle element with a stroke-width attribute
-                        strokeWidth: '2px' // Adjust the strokeWidth as needed
+                    '& circle[stroke-width]': {
+                        strokeWidth: '2px'
                     },
-                    color: '#5DAA60', // Set color to green
+                    color: '#5DAA60',
                     borderRadius: '50%',
                     strokeLinecap: 'rounded'
                 }}
@@ -169,7 +168,6 @@ export default function AuctionCard() {
             />
             <Box sx={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                 <TextField
-                    //   id="cvv"
                     label="Place Bid"
                     variant="outlined"
                     InputLabelProps={{ style: { color: '#5DAA60' } }}
@@ -179,7 +177,6 @@ export default function AuctionCard() {
                         "& .MuiOutlinedInput-root": {
                             fontWeight: 'bold',
                             color: 'black',
-                            // zIndex:'5555555555555',
                             borderColor: '#5DAA60',
                             '&:hover fieldset': {
                                 borderColor: '#5DAA60',
@@ -199,7 +196,7 @@ export default function AuctionCard() {
                     sx={{ width: '70%', justifyContent: 'center' }}
                 >
                     <Button
-                        sx={{ width: '70%', backgroundColor: '#5DAA60','&:hover':{backgroundColor:'#3abf3a'} }}
+                        sx={{ width: '70%', backgroundColor: '#5DAA60', '&:hover': { backgroundColor: '#3abf3a' } }}
                         variant="contained"
                         color="primary"
                         onClick={confirmBid ? confirmBidHandler : handleOneBid}

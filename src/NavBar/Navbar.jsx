@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,33 +7,26 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Badge, Card, CardActions, CardContent, Switch } from '@mui/material';
+import { Badge, Switch } from '@mui/material';
 import FlipCard from '../components/FlipCard';
 import CategoryContext from '../contexts/CategoriesContext';
-import zIndex from '@mui/material/styles/zIndex';
 import { Link, useNavigate } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { CartContext } from '../contexts/CartContext';
 
 const pages = ['Products', 'Categories', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-export default function Navbar({darkMode , toggleDarkMode}) {
+export default function Navbar({ darkMode, toggleDarkMode }) {
   const { categories } = useContext(CategoryContext);
-  const {totalItems , cartItems} = useContext(CartContext)
+  const { totalItems, cartItems } = useContext(CartContext)
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [hoveredPage, setHoveredPage] = React.useState(null);
   const navigate = useNavigate();
-
-
-  // useEffect(()=>{
-  //   console.log(totalItems);
-  // },[cartItems])
 
   const handleSettingClick = (event) => {
     console.log(event.currentTarget.textContent);
@@ -101,7 +93,6 @@ export default function Navbar({darkMode , toggleDarkMode}) {
               <MenuIcon />
             </IconButton>
 
-
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -120,8 +111,6 @@ export default function Navbar({darkMode , toggleDarkMode}) {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-
-
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
@@ -129,12 +118,11 @@ export default function Navbar({darkMode , toggleDarkMode}) {
               ))}
             </Menu>
 
-
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Link to={'products'}>
             <Typography
-            id="RouterNavLink"
+              id="RouterNavLink"
               variant="h5"
               noWrap
               component="a"
@@ -182,9 +170,7 @@ export default function Navbar({darkMode , toggleDarkMode}) {
               onMouseLeave={handlePageHoverOut}
               sx={{ my: 2, textAlign: 'center', position: 'relative' }}
             >
-
               <Link id="RouterNavLink" className='text-decoration-none h5 mx-2 ' >Categories </Link>
-
               {hoveredPage && (
                 <Box
                   sx={{
@@ -201,9 +187,6 @@ export default function Navbar({darkMode , toggleDarkMode}) {
                     zIndex: 3
                   }}
                 >
-
-
-
                   <Box className='d-flex flex-wrap' sx={{ zIndex: '999', height: '100%' }}  >
                     {categories && categories?.categories?.map(category => (
                       <FlipCard key={category.title} >
@@ -213,11 +196,7 @@ export default function Navbar({darkMode , toggleDarkMode}) {
                   </Box>
                 </Box>
               )}
-
             </Box>
-            {/* <Link id="RouterNavLink"  to="/profile">anywords</Link> */}
-
-
 
             <Box sx={{ my: 2, textAlign: 'center', position: 'relative' }} >
               <Link id="RouterNavLink" to={'Home'} className='text-decoration-none h5 mx-2 ' >Home </Link>
@@ -227,19 +206,22 @@ export default function Navbar({darkMode , toggleDarkMode}) {
             <Link id="RouterNavLink" to={'add-product'} className='text-decoration-none h4 mx-2 ' ><Button sx={{ backgroundColor: 'gray' }} variant="contained" >List</Button> </Link>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip  title="Open settings">
+
+            <Tooltip title="Open settings">
               <>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, fontSize: 40 }} />
-              </IconButton>
-              <IconButton color="inherit">
-                        <Badge badgeContent={totalItems} color="secondary">
-                            <ShoppingCartIcon />
-                        </Badge>
-                    </IconButton>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, fontSize: 40 }} />
+                </IconButton>
+                <IconButton color="inherit">
+                  <Badge badgeContent={totalItems} color="secondary">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </IconButton>
               </>
             </Tooltip>
+
             <Switch checked={darkMode} onChange={toggleDarkMode} />
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -259,7 +241,6 @@ export default function Navbar({darkMode , toggleDarkMode}) {
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <MenuItem onClick={handleSettingClick} textAlign="center">{setting}</MenuItem>
-
                 </MenuItem>
               ))}
             </Menu>

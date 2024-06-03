@@ -15,11 +15,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ProductsProvider>
         <CartProvider>
           <BrowserRouter>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>,
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>,
           </BrowserRouter>
-
         </CartProvider>
       </ProductsProvider>
     </CategoryProvider>

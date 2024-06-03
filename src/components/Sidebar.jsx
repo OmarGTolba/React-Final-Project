@@ -7,30 +7,28 @@ import PaymentsIcon from '@mui/icons-material/Payments';
 
 function Sidebar({ drawerWidth, handleListItemClick, selectedIndex }) {
     return (
-        <div style={{display:'flex' ,marginTop:'5%', zIndex:''}}>
-            <Box sx={{ display: 'flex'}}>
+        <div style={{ display: 'flex', marginTop: '5%', zIndex: '' }}>
+            <Box sx={{ display: 'flex' }}>
+
                 {/* Shape beside the sidebar */}
                 <Shape />
+                
                 {/* Sidebar-Section */}
                 <Drawer
                     variant="permanent"
                     sx={{
                         width: drawerWidth,
-                        // flexShrink: 0,
-                        // display:'flex',
-                        // alignItems:'center' ,
-                        // position: 'relative',
-
                         '& .MuiDrawer-paper': {
-                            width: drawerWidth, bgcolor: '#5daa60', border:'none', color: '#FFFFFF', height: '600px', borderRadius:'10px', position:'unset'
+                            width: drawerWidth, bgcolor: '#5daa60', border: 'none', color: '#FFFFFF', height: '600px', borderRadius: '10px', position: 'unset'
                         },
                     }}
                 >
                     <Toolbar sx={{
                         color: '#FFFFFF', fontWeight: '700', lineHeight: '44.98px'
-                    }}>Hello Mohamed!</Toolbar>
+                    }}>Hello Mohamed!
+                    </Toolbar>
 
-                    <Box sx={{  }}>
+                    <Box>
                         <List>
                             {['Profile Info', 'Orders', 'Addresses', 'Payments'].map((text, index) => (
                                 <ListItem
@@ -52,7 +50,6 @@ function Sidebar({ drawerWidth, handleListItemClick, selectedIndex }) {
                                 </ListItem>
                             ))}
                         </List>
-
                     </Box>
                 </Drawer >
             </Box>

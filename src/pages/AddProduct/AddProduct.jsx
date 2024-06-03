@@ -50,18 +50,17 @@ export default function AddProduct() {
         productForm.append('price', formData.price);
         productForm.append('productStatus', formData.productStatus);
         formData.images.forEach((image) => {
-            productForm.append('images', image); // Changed 'files' to 'images'
+            productForm.append('images', image); 
         });
 
         try {
-            await axios.post('http://127.0.0.1:3000/api/v1/products/add-product', productForm, { // Changed formData to productForm
+            await axios.post('http://127.0.0.1:3000/api/v1/products/add-product', productForm, { 
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'jwt': localStorage.getItem('token')
                 }
             });
-        //    alert('Product added successfully');
-            // Reset form after successful submission
+
             setFormData({
                 title: '',
                 name: '',
@@ -75,7 +74,6 @@ export default function AddProduct() {
             });
         } catch (err) {
             console.error(err);
-       //     alert('Failed to add product');
         }
     };
 

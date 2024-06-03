@@ -6,10 +6,9 @@ const useStyles = styled((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        // width: '50%',
         justifyContent: 'center',
         minHeight: '100vh',
-        backgroundImage: `url('background_image_url')`, // Replace 'background_image_url' with your image URL
+        backgroundImage: `url('background_image_url')`, 
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -18,10 +17,9 @@ const useStyles = styled((theme) => ({
     content: {
         textAlign: 'center',
         marginBottom: theme.spacing(2),
-        // width:'50%'
     },
     image: {
-        width: '50%', // Adjust image size as needed
+        width: '50%', 
     },
 }));
 

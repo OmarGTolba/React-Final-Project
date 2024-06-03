@@ -286,91 +286,93 @@ const PlaceOrder = () => {
                 {
                     selectedPaymentMethod === 'paypal' && (
                         <>
-                        <Box sx={{display:'flex', justifyContent:'space-between', width:'100%'}}>
-                            <Box>
-                                <img style={{cursor:'pointer', marginLeft:'-16px'}} src="paypal.png" width={200} alt="" />
-                            </Box>
-                            <Box mt={4} sx={{ width: '100%', display:'flex',flexDirection:'column',alignItems:'flex-end', margin:'0' }}>
-                                <Box sx={{ borderLeft: '2px solid #5DAA60', borderBottom: '25px solid #5DAA60', borderTop: '25px solid #5DAA60', borderRight: '2px solid #5DAA60', marginBottom: '40px', padding: '8px 60px', fontWeight: 'bold', width: '40%' }} variant="contained" color="primary">
-                                    <Typography sx={{ display: 'flex', justifyContent: 'center', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        Order Summary
-                                    </Typography>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        <Typography>Total</Typography>
-                                        <Typography>
-                                            {totalPrice} EGP
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                                <Box>
+                                    <img style={{ cursor: 'pointer', marginLeft: '-16px' }} src="paypal.png" width={200} alt="" />
+                                </Box>
+                                <Box mt={4} sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', margin: '0' }}>
+                                    <Box sx={{ borderLeft: '2px solid #5DAA60', borderBottom: '25px solid #5DAA60', borderTop: '25px solid #5DAA60', borderRight: '2px solid #5DAA60', marginBottom: '40px', padding: '8px 60px', fontWeight: 'bold', width: '40%' }} variant="contained" color="primary">
+                                        <Typography sx={{ display: 'flex', justifyContent: 'center', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                            Order Summary
                                         </Typography>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                            <Typography>Total</Typography>
+                                            <Typography>
+                                                {totalPrice} EGP
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                            <Typography>Added Tax</Typography>
+                                            <Typography>
+                                                {Tax} EGP
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                            <Typography>COD</Typography>
+                                            <Typography>
+                                                {COD} EGP
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                            <Typography>Total</Typography>
+                                            <Typography>
+                                                {totalCash}
+                                            </Typography>
+                                        </Box>
                                     </Box>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        <Typography>Added Tax</Typography>
-                                        <Typography>
-                                            {Tax} EGP
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        <Typography>COD</Typography>
-                                        <Typography>
-                                            {COD} EGP
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        <Typography>Total</Typography>
-                                        <Typography>
-                                            {totalCash}
-                                        </Typography>
+                                    <Box mt={4} sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end', margin: '0' }}>
+                                        <Button onClick={handlePlaceOrder} sx={{ backgroundColor: '#5DAA60', marginBottom: '40px', fontWeight: 'bold', width: '40%', '&:hover': { backgroundColor: '#66BB6A' } }} variant="contained" >
+                                            Place order
+                                        </Button>
                                     </Box>
                                 </Box>
-                                <Box mt={4} sx={{ width: '100%', display:'flex',justifyContent:'flex-end', margin:'0' }}>
-                                    <Button onClick={handlePlaceOrder} sx={{ backgroundColor: '#5DAA60', marginBottom: '40px', fontWeight: 'bold', width: '40%', '&:hover': { backgroundColor: '#66BB6A' } }} variant="contained" >
-                                        Place order
-                                    </Button>
-                                </Box>
                             </Box>
-                        </Box>
                         </>
                     )
                 }
+
                 {
-                    selectedPaymentMethod === 'cash' &&  
+                    selectedPaymentMethod === 'cash' &&
                     <>
                         <Box mt={4} sx={{ width: '100%' }}>
-                                <Box sx={{ borderLeft: '2px solid #5DAA60', borderBottom: '25px solid #5DAA60', borderTop: '25px solid #5DAA60', borderRight: '2px solid #5DAA60', marginBottom: '40px', padding: '8px 60px', fontWeight: 'bold', width: '30%' }} variant="contained" color="primary">
-                                    <Typography sx={{ display: 'flex', justifyContent: 'center', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        Order Summary
+                            <Box sx={{ borderLeft: '2px solid #5DAA60', borderBottom: '25px solid #5DAA60', borderTop: '25px solid #5DAA60', borderRight: '2px solid #5DAA60', marginBottom: '40px', padding: '8px 60px', fontWeight: 'bold', width: '30%' }} variant="contained" color="primary">
+                                <Typography sx={{ display: 'flex', justifyContent: 'center', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                    Order Summary
+                                </Typography>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                    <Typography>Total</Typography>
+                                    <Typography>
+                                        {totalPrice} EGP
                                     </Typography>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        <Typography>Total</Typography>
-                                        <Typography>
-                                            {totalPrice} EGP
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        <Typography>Added Tax</Typography>
-                                        <Typography>
-                                            {Tax} EGP
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        <Typography>COD</Typography>
-                                        <Typography>
-                                            {COD} EGP
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
-                                        <Typography>Total</Typography>
-                                        <Typography>
-                                            {totalCash}
-                                        </Typography>
-                                    </Box>
                                 </Box>
-                                <Box mt={4} sx={{ width: '100%' }}>
-                                    <Button onClick={handlePlaceOrder} sx={{ backgroundColor: '#5DAA60', marginBottom: '40px', fontWeight: 'bold', width: '30%', '&:hover': { backgroundColor: '#66BB6A' } }} variant="contained" >
-                                        Place order
-                                    </Button>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                    <Typography>Added Tax</Typography>
+                                    <Typography>
+                                        {Tax} EGP
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                    <Typography>COD</Typography>
+                                    <Typography>
+                                        {COD} EGP
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', fontSize: '20px', color: '#5DAA60', borderBottom: '2px solid #5DAA60' }}>
+                                    <Typography>Total</Typography>
+                                    <Typography>
+                                        {totalCash}
+                                    </Typography>
                                 </Box>
                             </Box>
+                            <Box mt={4} sx={{ width: '100%' }}>
+                                <Button onClick={handlePlaceOrder} sx={{ backgroundColor: '#5DAA60', marginBottom: '40px', fontWeight: 'bold', width: '30%', '&:hover': { backgroundColor: '#66BB6A' } }} variant="contained" >
+                                    Place order
+                                </Button>
+                            </Box>
+                        </Box>
                     </>
                 }
+
                 {
                     selectedPaymentMethod === 'card' && (
                         <>
@@ -407,7 +409,6 @@ const PlaceOrder = () => {
                         </>
                     )
                 }
-
             </Box>
 
             {/* Delete Confirmation Dialog */}
